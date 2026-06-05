@@ -1,71 +1,236 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Kurian Abraham</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kurian Abraham | Data Analyst</title>
+
 <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
 body{
-font-family:Arial;
-background:#121212;
+font-family:'Segoe UI',sans-serif;
+background:#0f172a;
 color:white;
-padding:30px;
+line-height:1.6;
 }
-h1{
-color:#4da6ff;
-}
-.card{
-background:#1f1f1f;
+
+.hero{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
 padding:20px;
-border-radius:10px;
+background:linear-gradient(135deg,#0f172a,#1e293b);
+}
+
+.hero img{
+width:220px;
+height:220px;
+border-radius:50%;
+object-fit:cover;
+border:5px solid #38bdf8;
+box-shadow:0 0 30px rgba(56,189,248,.5);
 margin-bottom:20px;
 }
-a{
-color:#4da6ff;
-}
-</style>
-</head>
 
+.hero h1{
+font-size:3rem;
+margin-bottom:10px;
+}
+
+.hero p{
+font-size:1.2rem;
+color:#cbd5e1;
+margin-bottom:20px;
+}
+
+.btn{
+display:inline-block;
+padding:12px 25px;
+background:#38bdf8;
+color:white;
+text-decoration:none;
+border-radius:8px;
+font-weight:bold;
+}
+
+.section{
+max-width:1100px;
+margin:auto;
+padding:50px 20px;
+}
+
+.card{
+background:#1e293b;
+padding:25px;
+border-radius:15px;
+margin-bottom:25px;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+h2{
+color:#38bdf8;
+margin-bottom:15px;
+}
+
+.skills{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:15px;
+}
+
+.skill{
+background:#334155;
+padding:15px;
+border-radius:10px;
+text-align:center;
+font-weight:bold;
+}
+
+ul{
+padding-left:20px;
+}
+
+footer{
+text-align:center;
+padding:30px;
+color:#94a3b8;
+}
+
+</style>
+
+</head>
 <body>
 
-<img src="profile.jpg" alt="Kurian Abraham"
-style="width:220px;height:220px;border-radius:50%;object-fit:cover;border:4px solid #4da6ff;">
+<div class="hero">
+
+<img src="profile.jpg" alt="Kurian Abraham">
 
 <h1>Kurian Abraham K P</h1>
 
-<p>
-Data Analyst | SQL | Python | Power BI | Excel
-</p>
+<p>Data Analyst | SQL | Python | Power BI | Excel</p>
+
+<a class="btn"
+href="https://www.linkedin.com/in/kurianabraham79/"
+target="_blank">
+View LinkedIn Profile
+</a>
+
+</div>
+
+<div class="section">
 
 <div class="card">
 <h2>About Me</h2>
+
 <p>
-Motivated aspiring Data Analyst with training in SQL, Python, Power BI and Excel.
+Motivated and detail-oriented Data Analyst with experience in business intelligence,
+dashboard development, and analytics. Skilled in SQL, Python, Power BI, Tableau,
+Excel, DAX, and Amazon Redshift. Passionate about turning data into meaningful
+business insights.
 </p>
+
 </div>
 
 <div class="card">
+
 <h2>Skills</h2>
-<ul>
-<li>SQL</li>
-<li>Python</li>
-<li>Power BI</li>
-<li>Excel</li>
-</ul>
+
+<div class="skills">
+
+<div class="skill">SQL</div>
+<div class="skill">Python</div>
+<div class="skill">Power BI</div>
+<div class="skill">Excel</div>
+<div class="skill">Tableau</div>
+<div class="skill">DAX</div>
+<div class="skill">Amazon Redshift</div>
+<div class="skill">Power Query</div>
+
+</div>
+
 </div>
 
 <div class="card">
+
+<h2>Experience</h2>
+
+<p>
+<b>Data Analyst - AstraZen Technologies Pvt Ltd</b><br>
+2022 - Present
+</p>
+
+<br>
+
+<ul>
+<li>Developed interactive Power BI dashboards.</li>
+<li>Analyzed e-commerce and marketing performance data.</li>
+<li>Created KPI reports and business intelligence solutions.</li>
+<li>Worked with SQL and Amazon Redshift data warehouses.</li>
+</ul>
+
+</div>
+
+<div class="card">
+
+<h2>Projects</h2>
+
+<ul>
+<li>Product Sales & Revenue Analytics</li>
+<li>Marketing Campaign Analytics</li>
+<li>Claims & RCM Analytics Dashboard</li>
+</ul>
+
+</div>
+
+<div class="card">
+
 <h2>Achievements</h2>
+
 <ul>
-<li>Rajya Puraskar Award</li>
+<li>Rajya Puraskar Award Recipient</li>
 <li>Employee of the Month - 6 Times</li>
+<li>Data Science Training - Besant Technologies</li>
 </ul>
+
 </div>
 
 <div class="card">
-<h2>LinkedIn</h2>
-<a href="https://www.linkedin.com/in/kurianabraham79/" target="_blank">
-Visit My LinkedIn Profile
+
+<h2>Contact</h2>
+
+<p>Email: kurianabraham9597@gmail.com</p>
+
+<p>
+LinkedIn:
+<a href="https://www.linkedin.com/in/kurianabraham79/"
+target="_blank"
+style="color:#38bdf8;">
+linkedin.com/in/kurianabraham79
 </a>
+</p>
+
 </div>
+
+</div>
+
+<footer>
+
+© 2026 Kurian Abraham K P | Data Analyst Portfolio
+
+</footer>
 
 </body>
 </html>
