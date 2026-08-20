@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kurianabraham.site/sitemap.xml
