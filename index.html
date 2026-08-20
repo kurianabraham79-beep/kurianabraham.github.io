@@ -1,220 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Kurian Abraham K P | Data Engineering Analyst portfolio featuring SQL, Python, PySpark, Power BI, AWS, Redshift, data engineering, analytics, and BI.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Kurian Abraham K P — Data Engineering Analyst portfolio.">
 <meta name="author" content="Kurian Abraham K P">
-<meta property="og:title" content="Kurian Abraham K P | Data Engineering Analyst">
-<meta property="og:description" content="Data Engineering Analyst focused on scalable data pipelines, analytics, business intelligence, and data-driven solutions.">
+<meta property="og:title" content="Kurian Abraham K P — Data Engineering Analyst">
+<meta property="og:description" content="Data engineering, analytics, BI and scalable data solutions.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kurianabraham.site/">
 <meta property="og:image" content="https://kurianabraham.site/profile.jpg">
-<title>Kurian Abraham K P | Data Engineering Analyst</title>
+<title>Kurian Abraham K P — Data Engineering Analyst</title>
 <style>
-:root{
-  --bg:#050505;
-  --bg-soft:#0a0a0b;
-  --card:#0d0d0f;
-  --card-2:#111114;
-  --text:#f5f5f7;
-  --muted:#9b9ca3;
-  --line:rgba(255,255,255,.10);
-  --line-strong:rgba(255,255,255,.16);
-  --accent:#7c8cff;
-  --accent-2:#9aa7ff;
-  --success:#7ee2b8;
-  --shadow:0 30px 90px rgba(0,0,0,.38);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:Inter,Segoe UI,system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
-body:before{content:"";position:fixed;inset:-30% -20%;pointer-events:none;background:radial-gradient(circle at 72% 12%,rgba(124,140,255,.12),transparent 28%),radial-gradient(circle at 12% 46%,rgba(126,226,184,.06),transparent 24%);z-index:-2}
-body:after{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:72px 72px;mask-image:linear-gradient(to bottom,black,transparent 80%);z-index:-1}
-a{color:inherit;text-decoration:none}
-img{display:block;max-width:100%}
-.container{width:min(1160px,calc(100% - 44px));margin:auto}
-.nav{position:sticky;top:0;z-index:50;background:rgba(5,5,5,.76);backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
-.nav-inner{width:min(1160px,calc(100% - 44px));min-height:76px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.brand{display:flex;align-items:center;gap:12px;font-weight:850;letter-spacing:-.02em}
-.brand-mark{width:38px;height:38px;border:1px solid var(--line-strong);border-radius:12px;display:grid;place-items:center;background:linear-gradient(145deg,#15151a,#09090a);box-shadow:inset 0 1px rgba(255,255,255,.06);font-size:.82rem}
-.brand span:last-child{font-size:.96rem}
-.nav-links{display:flex;align-items:center;gap:4px}
-.nav-links a{padding:9px 12px;border-radius:9px;color:var(--muted);font-size:.86rem;font-weight:700;transition:.25s ease}
-.nav-links a:hover{color:var(--text);background:rgba(255,255,255,.06)}
-.hero{min-height:calc(100vh - 76px);display:flex;align-items:center;padding:84px 0 70px;position:relative}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(320px,.82fr);gap:72px;align-items:center}
-.eyebrow{display:inline-flex;align-items:center;gap:9px;margin-bottom:24px;padding:7px 11px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.035);color:#c7c9d1;font-size:.72rem;font-weight:850;letter-spacing:.13em;text-transform:uppercase}
-.eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--success);box-shadow:0 0 16px rgba(126,226,184,.7)}
-h1{max-width:900px;font-size:clamp(3.25rem,7vw,6.8rem);line-height:.92;letter-spacing:-.065em;margin-bottom:28px}
-.gradient{background:linear-gradient(100deg,#fff 10%,#aeb7ff 72%,#7c8cff);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero-copy{max-width:700px;color:#b1b2b9;font-size:1.08rem;line-height:1.8;margin-bottom:34px}
-.actions{display:flex;flex-wrap:wrap;gap:11px}
-.btn{min-height:48px;display:inline-flex;align-items:center;justify-content:center;padding:0 18px;border-radius:10px;border:1px solid var(--line-strong);font-weight:800;font-size:.9rem;transition:.25s ease}
-.btn.primary{background:#f5f5f7;color:#070708;border-color:#f5f5f7}
-.btn.secondary{background:rgba(255,255,255,.035);color:#eee}
-.btn:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(0,0,0,.3);border-color:rgba(255,255,255,.25)}
-.hero-side{position:relative}
-.profile-wrap{position:relative;max-width:410px;margin-left:auto}
-.profile-glow{position:absolute;inset:-35px -25px;background:radial-gradient(circle,rgba(124,140,255,.18),transparent 64%);filter:blur(10px);z-index:-1}
-.profile-card{position:relative;padding:12px;border:1px solid var(--line-strong);border-radius:24px;background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.025));box-shadow:var(--shadow);overflow:hidden}
-.profile-card:after{content:"";position:absolute;inset:0;background:linear-gradient(130deg,rgba(255,255,255,.08),transparent 35%);pointer-events:none}
-.profile-card img{width:100%;aspect-ratio:4/4.7;object-fit:cover;object-position:center;border-radius:17px;filter:saturate(.82) contrast(1.04)}
-.profile-info{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.profile-chip{padding:12px 13px;border:1px solid var(--line);border-radius:12px;background:rgba(0,0,0,.24)}
-.profile-chip span{display:block;color:#7f8088;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
-.profile-chip strong{font-size:.82rem}
-.float-tag{position:absolute;right:-22px;top:38px;padding:10px 13px;border:1px solid var(--line-strong);border-radius:12px;background:rgba(13,13,15,.9);backdrop-filter:blur(12px);box-shadow:var(--shadow);font-size:.74rem;font-weight:800;color:#dfe1e8}
-.float-tag b{color:var(--accent-2)}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:54px}
-.stat{padding:20px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025)}
-.stat strong{display:block;font-size:1.65rem;letter-spacing:-.04em}
-.stat span{display:block;color:#777981;font-size:.78rem;margin-top:5px}
-.section{padding:105px 0}
-.section-label{color:var(--accent-2);font-size:.7rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px}
-.section-head{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:38px}
-h2{max-width:760px;font-size:clamp(2.2rem,4.7vw,4.1rem);line-height:1;letter-spacing:-.05em}
-.section-head>p{max-width:410px;color:#85868e;font-size:.95rem}
-.glass{border:1px solid var(--line);background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.018));box-shadow:var(--shadow);border-radius:18px}
-.about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
-.about-main{padding:34px}
-.about-main p{color:#aaaab2;font-size:1.02rem;line-height:1.85;margin-bottom:18px}
-.about-main p:last-child{margin-bottom:0}
-.focus-list{display:grid}
-.focus-item{padding:22px;border-bottom:1px solid var(--line)}
-.focus-item:last-child{border-bottom:0}
-.focus-item span{display:block;color:#777981;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px}
-.focus-item strong{font-size:.94rem}
-.experience{display:grid;grid-template-columns:190px 1fr;gap:26px}
-.exp-date{color:#777981;font-size:.82rem;padding-top:5px}
-.exp-card{padding:28px}
-.exp-top{display:flex;justify-content:space-between;gap:20px;align-items:start;margin-bottom:16px}
-.exp-top h3{font-size:1.35rem;letter-spacing:-.02em}
-.exp-company{color:var(--accent-2);font-size:.8rem;font-weight:800;margin-top:3px}
-.exp-badge{white-space:nowrap;padding:7px 9px;border-radius:999px;background:rgba(126,226,184,.08);border:1px solid rgba(126,226,184,.16);color:var(--success);font-size:.68rem;font-weight:850}
-.exp-card p{color:#9798a1;max-width:820px;line-height:1.8}
-.stack{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.stack-card{padding:22px;min-height:145px;transition:.25s ease}
-.stack-card:hover{transform:translateY(-4px);border-color:var(--line-strong);background:rgba(255,255,255,.055)}
-.stack-card strong{display:block;font-size:1rem;margin-bottom:9px}
-.stack-card span{color:#777981;font-size:.82rem;line-height:1.6}
-.projects{display:grid;gap:18px}
-.project{display:grid;grid-template-columns:42% 58%;overflow:hidden;min-height:310px;transition:.3s ease}
-.project:hover{transform:translateY(-4px);border-color:var(--line-strong)}
-.project-image{position:relative;min-height:310px;overflow:hidden;background:#080809}
-.project-image img{width:100%;height:100%;object-fit:cover;transition:.5s ease;filter:saturate(.82)}
-.project:hover .project-image img{transform:scale(1.025);filter:saturate(1)}
-.project-image:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(13,13,15,.85));pointer-events:none}
-.project-content{padding:34px;display:flex;flex-direction:column;justify-content:center}
-.project-top{display:flex;justify-content:space-between;gap:20px;align-items:start;margin-bottom:13px}
-.project h3{font-size:1.6rem;line-height:1.12;letter-spacing:-.03em}
-.project-type{white-space:nowrap;color:var(--accent-2);font-size:.68rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
-.project p{color:#92939b;line-height:1.75;margin-bottom:18px;max-width:650px}
-.tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
-.tag{padding:6px 9px;border:1px solid var(--line);border-radius:999px;color:#b9bac2;background:rgba(255,255,255,.025);font-size:.7rem;font-weight:800}
-.result{padding:13px 15px;border-left:2px solid var(--accent);background:rgba(124,140,255,.055);color:#a8a9b2;font-size:.82rem;line-height:1.6}
-.bfsi .project-image{display:grid;place-items:center;background:radial-gradient(circle at 50% 35%,rgba(124,140,255,.16),transparent 45%),#080809}
-.bfsi-art{width:78%;height:70%;position:relative;border:1px solid rgba(255,255,255,.1);border-radius:18px;background:linear-gradient(145deg,#111116,#08080a);box-shadow:0 30px 70px rgba(0,0,0,.45);padding:18px}
-.bfsi-art:before{content:"FRAUD DATA PLATFORM";display:block;color:#666874;font-size:.58rem;letter-spacing:.16em;margin-bottom:20px}
-.pipeline{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.node{min-height:58px;border:1px solid rgba(255,255,255,.1);border-radius:10px;display:grid;place-items:center;text-align:center;color:#c6c7ce;font-size:.58rem;background:rgba(255,255,255,.025)}
-.node.accent-node{border-color:rgba(124,140,255,.3);color:#aeb7ff;background:rgba(124,140,255,.07)}
-.flow-line{height:22px;border-left:1px dashed rgba(255,255,255,.18);margin:0 auto}
-.bfsi-note{position:absolute;bottom:15px;right:15px;color:#71727b;font-size:.55rem;letter-spacing:.08em}
-.contact{padding:42px;display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center;background:linear-gradient(145deg,#101014,#09090b)}
-.contact h2{font-size:clamp(2.1rem,4vw,3.7rem)}
-.contact p{color:#898a92;margin-top:14px;max-width:590px}
-.contact-actions{display:grid;gap:9px}
-.contact-actions a{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.025);font-size:.84rem;font-weight:750;transition:.25s ease}
-.contact-actions a:hover{background:rgba(255,255,255,.06);border-color:var(--line-strong)}
-.contact-actions span{color:#6f7078;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em}
-footer{padding:38px 0 55px;text-align:center;color:#5e5f67;font-size:.75rem}
-.reveal{animation:rise .8s both}
-@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-@media(max-width:900px){
-  .hero{padding-top:62px}.hero-grid,.about-grid,.contact{grid-template-columns:1fr}.hero-side{max-width:500px;margin:auto;width:100%}.stats,.stack{grid-template-columns:repeat(2,1fr)}.project{grid-template-columns:1fr}.project-image{min-height:280px}.project-image:after{background:linear-gradient(0deg,rgba(13,13,15,.75),transparent 65%)}.experience{grid-template-columns:1fr;gap:8px}.exp-date{padding-left:3px}.nav-inner{min-height:68px}.float-tag{right:-8px}}
-@media(max-width:620px){
-  .container,.nav-inner{width:min(100% - 28px,1160px)}.brand span:last-child{display:none}.nav-links{gap:0}.nav-links a{font-size:.74rem;padding:7px 7px}.hero{min-height:auto;padding:58px 0 60px}h1{font-size:clamp(3rem,16vw,4.8rem)}.hero-copy{font-size:.98rem}.actions{display:grid;grid-template-columns:1fr}.stats,.stack{grid-template-columns:1fr}.section{padding:72px 0}.section-head{display:block}.section-head>p{margin-top:14px}.profile-card{padding:9px}.profile-info{grid-template-columns:1fr 1fr}.project-content{padding:25px}.project-top{display:block}.project-type{display:block;margin-top:8px}.contact{padding:27px}.float-tag{right:-4px;top:18px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal,.project,.stack-card,.btn,.nav-links a,.project-image img{animation:none;transition:none}}
+:root{--bg:#050505;--panel:#0b0b0c;--panel2:#101011;--text:#f4f3ef;--muted:#85858b;--faint:#55555b;--line:#202024;--accent:#b6ff4a;--accent2:#d9ff9d;--max:1240px}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;line-height:1.55;overflow-x:hidden}body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 76% 8%,rgba(182,255,74,.07),transparent 25%),radial-gradient(circle at 10% 72%,rgba(255,255,255,.035),transparent 24%);z-index:-1}a{color:inherit;text-decoration:none}img{display:block;max-width:100%}.wrap{width:min(var(--max),calc(100% - 48px));margin:auto}
+header{position:fixed;left:0;right:0;top:0;z-index:100;background:rgba(5,5,5,.74);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.07)}.nav{height:74px;display:flex;align-items:center;justify-content:space-between}.logo{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:-.04em}.logo-mark{width:34px;height:34px;border:1px solid #303034;border-radius:50%;display:grid;place-items:center;font-size:11px;color:var(--accent)}.links{display:flex;gap:28px;align-items:center}.links a{font-size:12px;color:#a1a1a6;text-transform:uppercase;letter-spacing:.1em}.links a:hover{color:#fff}.nav-cta{border:1px solid #343438;border-radius:99px;padding:9px 14px;color:#fff!important}
+.hero{min-height:100vh;padding-top:74px;display:grid;align-items:center}.hero-grid{display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:end;padding:70px 0 48px}.micro{font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.2em;font-weight:900;margin-bottom:24px}.hero h1{font-size:clamp(64px,10vw,148px);line-height:.82;letter-spacing:-.085em;font-weight:900;max-width:1000px}.hero h1 span{display:block;color:#77777c}.hero h1 .lime{color:var(--accent)}.hero-copy{max-width:640px;color:#99999f;font-size:16px;line-height:1.8;margin:35px 0 30px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap}.pill{border:1px solid #303035;border-radius:99px;padding:12px 18px;font-size:12px;font-weight:800;transition:.25s}.pill.primary{background:var(--accent);color:#080808;border-color:var(--accent)}.pill:hover{transform:translateY(-2px);border-color:#555}.hero-visual{position:relative}.portrait{border-radius:4px;overflow:hidden;border:1px solid #252529;background:#111}.portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:grayscale(.25) contrast(1.08)}.portrait-label{display:flex;justify-content:space-between;padding:13px 0;color:#66666c;font-size:10px;text-transform:uppercase;letter-spacing:.12em}.portrait-label strong{color:#d7d7da}.orb{position:absolute;width:90px;height:90px;border:1px solid rgba(182,255,74,.5);border-radius:50%;right:-32px;top:-25px;box-shadow:0 0 60px rgba(182,255,74,.08)}.orb:after{content:"";position:absolute;width:7px;height:7px;background:var(--accent);border-radius:50%;left:8px;top:18px;box-shadow:0 0 18px var(--accent)}
+.ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap}.ticker-inner{display:flex;width:max-content;animation:scroll 24s linear infinite}.ticker span{padding:16px 32px;color:#68686e;font-size:10px;letter-spacing:.2em;text-transform:uppercase}.ticker b{color:var(--accent);font-weight:900}@keyframes scroll{to{transform:translateX(-50%)}}
+section{padding:120px 0}.section-top{display:grid;grid-template-columns:180px 1fr;gap:40px;margin-bottom:50px}.number{font-size:11px;color:var(--accent);letter-spacing:.2em;font-weight:900}.section-top h2{font-size:clamp(38px,5.5vw,76px);line-height:.95;letter-spacing:-.065em;max-width:850px}.section-top p{color:#77777d;max-width:620px;margin-top:18px;font-size:14px}
+.about-grid{display:grid;grid-template-columns:1.4fr .6fr;gap:1px;background:var(--line);border:1px solid var(--line)}.about-copy,.facts{background:var(--panel);padding:36px}.about-copy p{font-size:19px;line-height:1.8;color:#c2c2c6;max-width:760px}.facts{display:grid;align-content:start}.fact{padding:18px 0;border-bottom:1px solid var(--line)}.fact:last-child{border:0}.fact small{display:block;color:#55555b;text-transform:uppercase;letter-spacing:.14em;font-size:9px;margin-bottom:4px}.fact strong{font-size:15px}
+.experience{border-top:1px solid var(--line)}.job{display:grid;grid-template-columns:180px 1fr 180px;gap:30px;padding:32px 0;border-bottom:1px solid var(--line);align-items:start}.job-date,.job-type{font-size:11px;color:#66666c}.job-type{text-align:right;text-transform:uppercase;letter-spacing:.1em}.job h3{font-size:24px;letter-spacing:-.03em}.job h4{color:var(--accent2);font-size:12px;margin-top:4px}.job p{color:#7d7d83;font-size:13px;margin-top:12px;max-width:760px;line-height:1.75}
+.skill-layout{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}.skill-block{background:var(--panel);padding:28px}.skill-block h3{font-size:13px;color:#fff;margin-bottom:18px;text-transform:uppercase;letter-spacing:.1em}.skill-list{display:flex;flex-wrap:wrap;gap:8px}.skill{border:1px solid #2b2b30;border-radius:99px;padding:8px 12px;color:#aaaab0;font-size:11px}.skill:hover{border-color:var(--accent);color:var(--accent)}
+.projects{display:grid;gap:70px}.project{display:grid;grid-template-columns:110px 1fr;gap:25px}.project-num{font-size:11px;color:#5c5c62;padding-top:8px}.project-body{border-top:1px solid #2b2b30;padding-top:20px}.project-title{display:flex;justify-content:space-between;gap:20px;align-items:start}.project-title h3{font-size:clamp(28px,4vw,54px);line-height:.95;letter-spacing:-.055em;max-width:760px}.project-title span{font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:.14em;white-space:nowrap;padding-top:8px}.project-media{margin-top:28px;border:1px solid #252529;background:#0a0a0b;overflow:hidden;position:relative}.project-media img{width:100%;height:420px;object-fit:cover;transition:.5s;filter:saturate(.7)}.project:hover .project-media img{transform:scale(1.015);filter:saturate(1)}.project-desc{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:18px}.project-desc p{color:#808087;font-size:13px;line-height:1.75}.tags{display:flex;gap:7px;flex-wrap:wrap}.tag{border:1px solid #29292e;border-radius:99px;padding:7px 10px;color:#8d8d94;font-size:10px}.result{border-left:2px solid var(--accent);padding-left:16px;color:#b0b0b5!important}
+.bfsi-media{height:420px;display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,rgba(182,255,74,.08),transparent 35%),#080809}.architecture{width:min(720px,86%);display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:center}.arch-col{display:grid;gap:12px}.arch-node{height:74px;border:1px solid #2a2a2e;background:#0d0d0f;display:grid;place-items:center;text-align:center;padding:8px;color:#8e8e95;font-size:9px;text-transform:uppercase;letter-spacing:.08em}.arch-node.hot{border-color:rgba(182,255,74,.4);color:var(--accent);box-shadow:inset 0 0 30px rgba(182,255,74,.03)}.arch-arrow{text-align:center;color:#44444a;font-size:18px}
+.cta{border:1px solid #28282c;padding:50px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end;background:linear-gradient(120deg,#0b0b0c,#101011)}.cta h2{font-size:clamp(44px,6vw,86px);line-height:.9;letter-spacing:-.07em}.cta p{color:#77777d;margin-top:18px;font-size:13px}.contact-list{display:grid;gap:9px;min-width:260px}.contact-list a{border-bottom:1px solid #28282c;padding:10px 0;font-size:12px;color:#aaaab0;display:flex;justify-content:space-between}.contact-list a:hover{color:var(--accent)}.contact-list small{font-size:9px;color:#55555b;text-transform:uppercase;letter-spacing:.1em}footer{padding:35px 0 50px;color:#4d4d52;font-size:10px;display:flex;justify-content:space-between}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:50px}.hero-visual{max-width:400px}.section-top{grid-template-columns:100px 1fr}.about-grid,.skill-layout{grid-template-columns:1fr}.job{grid-template-columns:130px 1fr}.job-type{display:none}.project{grid-template-columns:70px 1fr}.project-desc{grid-template-columns:1fr}.cta{grid-template-columns:1fr}.contact-list{max-width:400px}.project-media img,.bfsi-media{height:330px}.architecture{width:92%;gap:7px}.arch-node{height:60px;font-size:7px}}
+@media(max-width:620px){.wrap{width:calc(100% - 28px)}.links{gap:10px}.links a:not(.nav-cta){display:none}.hero-grid{padding:55px 0 35px}.hero h1{font-size:clamp(58px,17vw,92px)}.hero-copy{font-size:14px}.portrait img{aspect-ratio:1/1.1}.section-top{display:block}.section-top h2{margin-top:14px}.job{grid-template-columns:1fr;gap:5px}.job-date{margin-bottom:5px}.project{grid-template-columns:1fr;gap:5px}.project-num{padding-top:0}.project-media img,.bfsi-media{height:250px}.project-title{display:block}.project-title span{display:block;margin-top:10px}.architecture{gap:5px}.arch-node{height:48px;font-size:6px}.cta{padding:30px 22px}footer{display:block}.ticker span{padding:14px 18px}}
 </style>
 </head>
 <body>
-<nav class="nav">
-  <div class="nav-inner">
-    <a class="brand" href="#"><span class="brand-mark">KA</span><span>Kurian Abraham</span></a>
-    <div class="nav-links">
-      <a href="#about">About</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#contact">Contact</a>
-    </div>
-  </div>
-</nav>
-
-<main>
-<section class="hero">
-  <div class="container">
-    <div class="hero-grid">
-      <div class="reveal">
-        <div class="eyebrow">Data Engineering Analyst · 4+ Years</div>
-        <h1>Building data systems that turn <span class="gradient">complex data</span> into useful decisions.</h1>
-        <p class="hero-copy">I’m Kurian Abraham K P, a Data Engineering Analyst with experience across E-Commerce, Marketing Analytics, Healthcare, and Banking. I work across SQL, Python, PySpark, Power BI, AWS, and data engineering workflows to build scalable pipelines, analytics solutions, and KPI-driven reporting.</p>
-        <div class="actions"><a class="btn primary" href="Kurian_resume.pdf" target="_blank" rel="noopener">View Resume ↗</a><a class="btn secondary" href="#projects">Explore Projects</a><a class="btn secondary" href="https://www.linkedin.com/in/kurianabraham79/" target="_blank" rel="noopener">LinkedIn ↗</a></div>
-      </div>
-      <div class="hero-side reveal">
-        <div class="profile-wrap"><div class="profile-glow"></div><div class="float-tag"><b>SQL</b> · PySpark · Power BI</div><div class="profile-card"><img src="profile.jpg" alt="Kurian Abraham K P"><div class="profile-info"><div class="profile-chip"><span>Role</span><strong>Data Engineering Analyst</strong></div><div class="profile-chip"><span>Based in</span><strong>Chennai, India</strong></div></div></div></div>
-      </div>
-    </div>
-    <div class="stats reveal"><div class="stat"><strong>4+</strong><span>Years of experience</span></div><div class="stat"><strong>4</strong><span>Core analytics domains</span></div><div class="stat"><strong>3</strong><span>Existing portfolio dashboards</span></div><div class="stat"><strong>BFSI</strong><span>Enterprise data engineering</span></div></div>
-  </div>
-</section>
-
-<section id="about" class="section">
-  <div class="container">
-    <div class="section-head"><div><div class="section-label">01 · About</div><h2>From raw data to reliable, decision-ready analytics.</h2></div><p>Data engineering, business intelligence, and analytics brought together in one workflow.</p></div>
-    <div class="about-grid">
-      <div class="glass about-main"><p>Data Engineer with 4+ years of experience designing and delivering data-driven solutions across E-Commerce, Marketing Analytics, Healthcare (RCM & Claims), and Banking domains.</p><p>My work spans scalable ETL workflows, data cleansing and transformation, data modeling, analytics, interactive dashboards, KPI development, and reporting automation. I focus on building reliable data foundations while keeping the final business insight clear and usable.</p></div>
-      <div class="glass focus-list"><div class="focus-item"><span>Engineering</span><strong>ETL · PySpark · Apache Spark · Databricks · Airflow</strong></div><div class="focus-item"><span>Analytics</span><strong>SQL · Python · Power BI · DAX · Power Query</strong></div><div class="focus-item"><span>Cloud & Data</span><strong>AWS · S3 · Amazon Redshift · Delta Lake · Kafka</strong></div><div class="focus-item"><span>Recognition</span><strong>Rajya Puraskar Award recipient</strong></div></div>
-    </div>
-  </div>
-</section>
-
-<section id="experience" class="section">
-  <div class="container">
-    <div class="section-head"><div><div class="section-label">02 · Experience</div><h2>One role. Multiple data environments.</h2></div><p>Current professional experience based on the updated CV.</p></div>
-    <div class="experience"><div class="exp-date">06/2022 — Present<br>Chennai, India</div><div class="glass exp-card"><div class="exp-top"><div><h3>Data Engineer</h3><div class="exp-company">Intenso Tech Solution Private Limited</div></div><div class="exp-badge">CURRENT</div></div><p>Designing and delivering data-driven solutions across banking, marketing analytics, and healthcare environments, with hands-on work in ETL development, data transformation, Spark-based processing, data quality, data modeling, analytics, and business intelligence.</p></div></div>
-  </div>
-</section>
-
-<section id="skills" class="section">
-  <div class="container">
-    <div class="section-head"><div><div class="section-label">03 · Stack</div><h2>A practical toolkit for modern data work.</h2></div><p>Skills and technologies reflected in the updated CV and project experience.</p></div>
-    <div class="stack">
-      <div class="glass stack-card"><strong>SQL & Databases</strong><span>SQL Server, Amazon Redshift, joins, CTEs, window functions, aggregations, query optimization.</span></div>
-      <div class="glass stack-card"><strong>Python & PySpark</strong><span>Python, Pandas, NumPy, SQLAlchemy, PyODBC, PySpark, Apache Spark.</span></div>
-      <div class="glass stack-card"><strong>BI & Reporting</strong><span>Power BI, Power BI Service, DAX, Power Query, dashboard development, KPI development.</span></div>
-      <div class="glass stack-card"><strong>Cloud & Lakehouse</strong><span>AWS, S3, Redshift, Databricks, Delta Lake, Apache Kafka.</span></div>
-      <div class="glass stack-card"><strong>Data Engineering</strong><span>ETL development, cleansing, transformation, data modeling, star schema, fact & dimension modeling.</span></div>
-      <div class="glass stack-card"><strong>Orchestration</strong><span>Apache Airflow, Control-M, scheduling, dependency management, monitoring, retries.</span></div>
-      <div class="glass stack-card"><strong>Big Data</strong><span>HDFS, Hive, Sqoop, distributed processing, partition tuning, caching, broadcast joins, AQE.</span></div>
-      <div class="glass stack-card"><strong>Delivery & Security</strong><span>Git, GitHub, Jenkins, Apache Ranger, AWS IAM, RBAC, technical documentation.</span></div>
-    </div>
-  </div>
-</section>
-
-<section id="projects" class="section">
-  <div class="container">
-    <div class="section-head"><div><div class="section-label">04 · Projects</div><h2>Selected work across analytics and data engineering.</h2></div><p>The three existing portfolio dashboards stay exactly in the project lineup, with one new BFSI data engineering case study added from the updated CV.</p></div>
-    <div class="projects">
-      <article class="glass project"><div class="project-image"><img src="1. Product Sales and Revenue Analytics.png" alt="Product Sales and Revenue Analytics dashboard"></div><div class="project-content"><div class="project-top"><h3>Product Sales & Revenue Analytics</h3><span class="project-type">Sales BI</span></div><p>Interactive dashboard designed to monitor revenue trends, product performance, profitability, and KPI movement across categories.</p><div class="tags"><span class="tag">Power BI</span><span class="tag">Revenue</span><span class="tag">Product KPIs</span></div><div class="result">Business view: identify products driving revenue and areas where performance needs attention.</div></div></article>
-      <article class="glass project"><div class="project-image"><img src="2. Marketing Campaign Analytics.png" alt="Marketing Campaign Analytics dashboard"></div><div class="project-content"><div class="project-top"><h3>Marketing Campaign Analytics</h3><span class="project-type">Marketing BI</span></div><p>Campaign analytics solution covering lead generation, conversion trends, revenue contribution, and marketing KPI reporting.</p><div class="tags"><span class="tag">SQL</span><span class="tag">Power BI</span><span class="tag">ROI</span><span class="tag">ROAS</span></div><div class="result">Business view: compare channels, campaign performance, funnel movement, and budget effectiveness.</div></div></article>
-      <article class="glass project"><div class="project-image"><img src="3. Claims & RCM Analytics Dashboard.png" alt="Claims and RCM Analytics dashboard"></div><div class="project-content"><div class="project-top"><h3>Claims & RCM Analytics Dashboard</h3><span class="project-type">Healthcare BI</span></div><p>Healthcare analytics dashboard focused on claims and revenue cycle management reporting, with a clear operational view of performance.</p><div class="tags"><span class="tag">Healthcare</span><span class="tag">RCM</span><span class="tag">Claims</span><span class="tag">Power BI</span></div><div class="result">Business view: make claims and revenue-cycle performance easier to monitor through KPI-driven reporting.</div></div></article>
-      <article class="glass project bfsi"><div class="project-image"><div class="bfsi-art"><div class="pipeline"><div class="node">RDBMS</div><div class="node">SOURCES</div><div class="node">S3</div><div class="flow-line"></div><div class="flow-line"></div><div class="flow-line"></div><div class="node accent-node">PYSPARK</div><div class="node accent-node">DATABRICKS</div><div class="node accent-node">AIRFLOW</div><div class="flow-line"></div><div class="flow-line"></div><div class="flow-line"></div><div class="node">HDFS / HIVE</div><div class="node">FRAUD ANALYTICS</div><div class="node">REPORTING</div></div><div class="bfsi-note">BFSI · BATCH ETL · DATA QUALITY · SECURITY</div></div></div><div class="project-content"><div class="project-top"><h3>Enterprise Fraud Data Platform</h3><span class="project-type">BFSI · Data Engineering</span></div><p>Enterprise-scale fraud data platform supporting fraud detection, transaction monitoring, risk analytics, and regulatory reporting. Built scalable batch ETL workflows for high-volume banking transactions with data ingestion, transformation, validation, analytics, and secure production operations.</p><div class="tags"><span class="tag">PySpark</span><span class="tag">Apache Spark</span><span class="tag">Databricks</span><span class="tag">Airflow</span><span class="tag">HDFS</span><span class="tag">Hive</span><span class="tag">AWS S3</span><span class="tag">Ranger</span></div><div class="result">Impact from CV: optimized Spark processing reduced ETL processing time by 30%, while workflow automation improved operational efficiency.</div></div></article>
-    </div>
-  </div>
-</section>
-
-<section id="contact" class="section">
-  <div class="container"><div class="glass contact"><div><div class="section-label">05 · Contact</div><h2>Let’s build something useful with data.</h2><p>Open to opportunities involving data engineering, analytics, business intelligence, ETL, dashboards, and data-driven solutions.</p></div><div class="contact-actions"><a href="mailto:kurianabraham7397@gmail.com">kurianabraham7397@gmail.com <span>Email</span></a><a href="tel:+917397352047">+91 7397352047 <span>Phone</span></a><a href="https://www.linkedin.com/in/kurianabraham79/" target="_blank" rel="noopener">LinkedIn Profile ↗ <span>Connect</span></a><a href="Kurian_resume.pdf" target="_blank" rel="noopener">Resume PDF ↗ <span>View</span></a></div></div></div>
-</section>
+<header><div class="wrap nav"><a class="logo" href="#top"><span class="logo-mark">KA</span><span>Kurian Abraham</span></a><nav class="links"><a href="#about">About</a><a href="#experience">Experience</a><a href="#work">Work</a><a class="nav-cta" href="#contact">Let's talk</a></nav></div></header>
+<main id="top">
+<section class="hero"><div class="wrap hero-grid"><div><div class="micro">Data Engineering Analyst · India</div><h1>BUILDING<br><span>DATA THAT</span><span class="lime">WORKS.</span></h1><p class="hero-copy">I design data pipelines, analytics solutions and decision-ready dashboards — combining engineering discipline with business intelligence.</p><div class="hero-actions"><a class="pill primary" href="#work">Explore my work ↘</a><a class="pill" href="Kurian_resume.pdf" target="_blank" rel="noopener">Download CV</a></div></div><div class="hero-visual"><div class="orb"></div><div class="portrait"><img src="profile.jpg" alt="Kurian Abraham K P"><div class="portrait-label"><span>Kurian Abraham K P</span><strong>Data Engineering Analyst</strong></div></div></div></div></section>
+<div class="ticker"><div class="ticker-inner"><span><b>SQL</b> · Data</span><span><b>PYTHON</b> · Engineering</span><span><b>PYSPARK</b> · Scale</span><span><b>POWER BI</b> · Insight</span><span><b>AWS</b> · Cloud</span><span><b>REDSHIFT</b> · Warehouse</span><span><b>SQL</b> · Data</span><span><b>PYTHON</b> · Engineering</span><span><b>PYSPARK</b> · Scale</span><span><b>POWER BI</b> · Insight</span><span><b>AWS</b> · Cloud</span><span><b>REDSHIFT</b> · Warehouse</span></div></div>
+<section id="about"><div class="wrap"><div class="section-top"><div class="number">01 / ABOUT</div><div><h2>Engineering the layer between raw data and real decisions.</h2><p>4+ years of experience building analytics and data solutions across banking, marketing, healthcare and e-commerce.</p></div></div><div class="about-grid"><div class="about-copy"><p>I work across the data lifecycle — extracting and transforming data, building reliable pipelines, developing analytical models, and presenting the result through business intelligence. My focus is not just moving data, but making it usable, trustworthy and easy to act on.</p></div><div class="facts"><div class="fact"><small>Current focus</small><strong>Data Engineering + BI</strong></div><div class="fact"><small>Experience</small><strong>4+ Years</strong></div><div class="fact"><small>Recognition</small><strong>Rajya Puraskar Award</strong></div><div class="fact"><small>Domains</small><strong>BFSI · Healthcare · Marketing · E-Commerce</strong></div></div></div></div></section>
+<section id="experience"><div class="wrap"><div class="section-top"><div class="number">02 / EXPERIENCE</div><div><h2>From business questions to scalable data solutions.</h2><p>A practical engineering mindset shaped by real analytics and reporting requirements.</p></div></div><div class="experience"><article class="job"><div class="job-date">JUN 2022 — PRESENT</div><div><h3>Data Engineer</h3><h4>Intenso Tech Solution</h4><p>Developing and supporting data engineering and analytics solutions across multiple business domains, with focus on SQL, Python, PySpark, AWS, Redshift, Power BI and data transformation workflows.</p></div><div class="job-type">Full-time</div></article></div></div></section>
+<section id="skills"><div class="wrap"><div class="section-top"><div class="number">03 / STACK</div><div><h2>A stack built for data at different layers.</h2><p>Core technologies from engineering and transformation through analytics and visualization.</p></div></div><div class="skill-layout"><div class="skill-block"><h3>Engineering</h3><div class="skill-list"><span class="skill">SQL</span><span class="skill">Python</span><span class="skill">PySpark</span><span class="skill">AWS</span><span class="skill">Amazon Redshift</span><span class="skill">SQL Server</span></div></div><div class="skill-block"><h3>Analytics & BI</h3><div class="skill-list"><span class="skill">Power BI</span><span class="skill">DAX</span><span class="skill">Power Query</span><span class="skill">Data Modeling</span><span class="skill">Data Visualization</span><span class="skill">KPI Reporting</span></div></div></div></div></section>
+<section id="work"><div class="wrap"><div class="section-top"><div class="number">04 / SELECTED WORK</div><div><h2>Four projects. Four different data problems.</h2><p>My portfolio combines the dashboards you already built with a deeper BFSI data-engineering case study from the updated CV.</p></div></div><div class="projects">
+<article class="project"><div class="project-num">01</div><div class="project-body"><div class="project-title"><h3>Product Sales & Revenue Analytics</h3><span>Sales Intelligence</span></div><div class="project-media"><img src="1. Product Sales and Revenue Analytics.png" alt="Product Sales and Revenue Analytics dashboard"></div><div class="project-desc"><div><p>Interactive business intelligence dashboard focused on product performance, revenue trends and decision-ready sales KPIs.</p><div class="tags"><span class="tag">Power BI</span><span class="tag">Revenue</span><span class="tag">Sales KPIs</span></div></div><p class="result">Turns product-level performance into a clear view of where revenue is coming from and where attention is needed.</p></div></div></article>
+<article class="project"><div class="project-num">02</div><div class="project-body"><div class="project-title"><h3>Marketing Campaign Analytics</h3><span>Marketing Intelligence</span></div><div class="project-media"><img src="2. Marketing Campaign Analytics.png" alt="Marketing Campaign Analytics dashboard"></div><div class="project-desc"><div><p>Campaign analytics dashboard designed to compare performance, conversions, acquisition and return across marketing activity.</p><div class="tags"><span class="tag">Power BI</span><span class="tag">ROI</span><span class="tag">Conversions</span></div></div><p class="result">Makes campaign performance easier to compare and gives stakeholders a faster route from numbers to action.</p></div></div></article>
+<article class="project"><div class="project-num">03</div><div class="project-body"><div class="project-title"><h3>Claims & RCM Analytics Dashboard</h3><span>Healthcare Intelligence</span></div><div class="project-media"><img src="3. Claims & RCM Analytics Dashboard.png" alt="Claims and RCM analytics dashboard"></div><div class="project-desc"><div><p>Healthcare analytics dashboard focused on claims, collections, denials and revenue-cycle performance.</p><div class="tags"><span class="tag">Healthcare</span><span class="tag">RCM</span><span class="tag">Operational KPIs</span></div></div><p class="result">Creates a cleaner operational view of claims and revenue-cycle patterns for faster monitoring.</p></div></div></article>
+<article class="project"><div class="project-num">04</div><div class="project-body"><div class="project-title"><h3>Enterprise Fraud Data Platform</h3><span>BFSI · Data Engineering</span></div><div class="project-media bfsi-media"><div class="architecture"><div class="arch-col"><div class="arch-node">Source Systems</div><div class="arch-node">Transaction Data</div></div><div class="arch-col"><div class="arch-arrow">→</div><div class="arch-node hot">ETL / Transformation</div><div class="arch-arrow">→</div></div><div class="arch-col"><div class="arch-node">Fraud Analytics</div><div class="arch-node hot">BI / Insights</div></div></div></div><div class="project-desc"><div><p>Enterprise fraud analytics platform for consolidating transaction data, transforming it through ETL workflows and supporting fraud monitoring and reporting.</p><div class="tags"><span class="tag">SQL</span><span class="tag">Python</span><span class="tag">PySpark</span><span class="tag">AWS</span><span class="tag">Redshift</span></div></div><p class="result">Optimized ETL processing by 30%, improving the efficiency of the data pipeline used for fraud analytics.</p></div></div></article>
+</div></div></section>
+<section id="contact"><div class="wrap"><div class="cta"><div><div class="number">05 / CONTACT</div><h2>LET'S BUILD<br><span style="color:var(--accent)">SOMETHING USEFUL.</span></h2><p>Open to opportunities involving data engineering, analytics, BI and data-driven products.</p></div><div class="contact-list"><a href="mailto:kurianabraham79@gmail.com">Email <small>kurianabraham79@gmail.com</small></a><a href="https://www.linkedin.com/in/kurianabraham79/" target="_blank" rel="noopener">LinkedIn <small>Profile ↗</small></a><a href="Kurian_resume.pdf" target="_blank" rel="noopener">Resume <small>PDF ↗</small></a></div></div></div></section>
 </main>
-<footer><div class="container">© 2026 Kurian Abraham K P · Data Engineering Analyst</div></footer>
+<footer class="wrap"><span>© 2026 Kurian Abraham K P</span><span>DATA ENGINEERING ANALYST</span></footer>
 </body>
 </html>
