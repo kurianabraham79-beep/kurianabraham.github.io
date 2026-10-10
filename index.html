@@ -1,255 +1,153 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DataPulse CLI | Open-source data pipeline automation</title>
-<meta name="description" content="DataPulse CLI is an open-source PySpark and data pipeline automation utility with LLM-powered log parsing and real-time schema validation.">
-<meta name="theme-color" content="#09090b">
-<meta property="og:title" content="DataPulse CLI | Open-source data pipeline automation">
-<meta property="og:description" content="Automate PySpark ETL, parse logs with Claude, and catch schema drift before it breaks your pipelines.">
-<meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2309090b'/%3E%3Cpath d='M3 17h6l3-9 5 17 3-8h9' fill='none' stroke='%2322d3ee' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com/3.4.17"></script>
-<script>
-tailwind.config = {
-  theme: { extend: {
-    fontFamily: {
-      sans: ['Geist', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-      mono: ['"Geist Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace']
-    }
-  } }
-}
-</script>
-<style>
-  body { background: #09090b; }
-  .bg-grid {
-    background-image: linear-gradient(rgba(63,63,70,.28) 1px, transparent 1px), linear-gradient(90deg, rgba(63,63,70,.28) 1px, transparent 1px);
-    background-size: 56px 56px;
-    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 75%);
-            mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 75%);
-  }
-  .glow { box-shadow: 0 0 0 1px rgba(34,211,238,.25), 0 30px 120px -30px rgba(34,211,238,.35); }
-  .cursor::after { content: ""; display: inline-block; width: .55em; height: 1.1em; margin-left: 2px; vertical-align: text-bottom; background: #22d3ee; animation: blink 1s steps(1) infinite; }
-  @keyframes blink { 50% { opacity: 0; } }
-  :focus-visible { outline: 2px solid #22d3ee; outline-offset: 3px; border-radius: 6px; }
-  @media (prefers-reduced-motion: reduce) { .cursor::after { animation: none; } html { scroll-behavior: auto; } }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101411">
+  <meta name="description" content="DataPulse helps teams turn complex data into confident decisions through analytics engineering, Power BI dashboards, and scalable data pipelines.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="DataPulse — Data, made useful.">
+  <meta property="og:description" content="Analytics, dashboards, and data engineering built around the decisions your business needs to make.">
+  <meta property="og:url" content="https://kurianabraham.site/">
+  <link rel="canonical" href="https://kurianabraham.site/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>DataPulse — Data, made useful.</title>
+  <style>
+    :root{--bg:#101411;--panel:#171d19;--panel2:#1d251f;--line:#303b32;--text:#f1f5ef;--muted:#a4afa4;--green:#c8f169;--green2:#a8d84d;--orange:#f1a978;--max:1180px;--radius:20px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:92px}body{margin:0;background:var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}button,input,textarea,select{font:inherit}button,a{-webkit-tap-highlight-color:transparent}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--green);outline-offset:4px}
+    .wrap{width:min(var(--max),calc(100% - 48px));margin-inline:auto}.mono{font-family:"DM Mono",monospace}.muted{color:var(--muted)}.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--green);font:500 11px "DM Mono",monospace;letter-spacing:.12em;text-transform:uppercase}.eyebrow:before{content:"";width:22px;height:1px;background:var(--green)}
+    .site-header{position:sticky;top:0;z-index:50;background:rgba(16,20,17,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.07)}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:28px}.brand{display:inline-flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.05em;font-size:20px}.brand-mark{width:31px;height:31px;display:grid;place-items:center;border-radius:10px;background:var(--green);color:#11170d}.brand-mark svg{width:20px;height:20px}.nav-links{display:flex;align-items:center;gap:30px;color:#c0c9c0;font-size:12px}.nav-links a:hover{color:var(--green)}.nav-cta,.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:1px solid transparent;border-radius:8px;padding:12px 17px;background:var(--green);color:#13190f;font-weight:800;font-size:12px;transition:transform .2s,background .2s,border-color .2s}.nav-cta:hover,.btn:hover{background:#d8ff88;transform:translateY(-2px)}.btn-secondary{background:transparent;border-color:#4a564a;color:var(--text)}.btn-secondary:hover{background:var(--panel2);border-color:#7a8a79}.menu-toggle{display:none;background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:9px}
+    .hero{position:relative;overflow:hidden;padding:92px 0 78px}.hero:before{content:"";position:absolute;width:640px;height:640px;right:-160px;top:-280px;background:radial-gradient(circle,rgba(200,241,105,.12),transparent 68%);pointer-events:none}.hero-grid{position:relative;display:grid;grid-template-columns:1.04fr .96fr;gap:64px;align-items:center}.hero h1{font-size:clamp(46px,6.1vw,78px);letter-spacing:-.075em;line-height:1.04;font-weight:700;margin:22px 0 24px;max-width:670px}.hero h1 em{font-style:normal;color:var(--green)}.hero-copy{max-width:520px;color:#b2bcb2;font-size:16px;line-height:1.85}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}.hero-note{display:flex;align-items:center;gap:10px;margin-top:30px;color:#94a094;font:11px "DM Mono",monospace}.status-dot{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 0 4px rgba(200,241,105,.1)}.hero-visual{position:relative;min-width:0}.visual-frame{border:1px solid #3b463b;border-radius:18px;background:#151b16;padding:16px;box-shadow:0 32px 90px rgba(0,0,0,.3);transform:rotate(1.2deg)}.frame-top{display:flex;justify-content:space-between;align-items:center;padding:4px 3px 15px;border-bottom:1px solid var(--line);font:10px "DM Mono",monospace;color:#9eaa9e}.frame-dots{display:flex;gap:5px}.frame-dots i{width:6px;height:6px;border-radius:50%;background:#526052}.visual-label{display:flex;align-items:center;justify-content:space-between;margin:17px 2px 14px}.visual-label strong{font-size:13px}.pill{font:9px "DM Mono",monospace;padding:5px 7px;border-radius:5px;color:var(--green);background:rgba(200,241,105,.09);border:1px solid rgba(200,241,105,.2)}.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.metric{padding:12px 10px;border:1px solid #2d382e;border-radius:9px;background:#1b221c}.metric span{display:block;font:9px "DM Mono",monospace;color:#9ca99b}.metric strong{display:block;font-size:20px;letter-spacing:-.05em;margin:5px 0 1px}.metric small{font-size:9px;color:var(--green)}.chart-box{margin-top:9px;padding:15px 13px 9px;border:1px solid #2d382e;border-radius:9px;background:#1b221c}.chart-head{display:flex;justify-content:space-between;font:9px "DM Mono",monospace;color:#a7b1a5}.chart{display:block;width:100%;height:auto;margin-top:10px}.legend{display:flex;gap:13px;margin-top:5px;font:9px "DM Mono",monospace;color:#a6b1a5}.legend i{display:inline-block;width:6px;height:6px;border-radius:2px;background:var(--green);margin-right:5px}.legend i.orange{background:var(--orange)}.float-note{position:absolute;right:-19px;bottom:32px;padding:12px 14px;background:#222b22;border:1px solid #455344;border-radius:10px;box-shadow:0 15px 35px #0005;font:10px "DM Mono",monospace}.float-note b{color:var(--green);font-weight:500;display:block;font-size:12px;margin-bottom:3px}
+    .trust-strip{border-block:1px solid var(--line);padding:23px 0}.trust-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}.trust-caption{font:10px "DM Mono",monospace;text-transform:uppercase;letter-spacing:.1em;color:#829082}.trust-item{display:flex;align-items:center;gap:8px;color:#c3ccc1;font-size:12px;font-weight:700}.trust-item svg{color:var(--green);width:17px;height:17px}
+    section.section{padding:105px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:42px}.section-head h2,.split-copy h2,.contact-copy h2{font-size:clamp(34px,4.5vw,52px);line-height:1.1;letter-spacing:-.065em;font-weight:700;margin:15px 0 0}.section-head p{max-width:390px;color:var(--muted);font-size:13px;margin:0 0 3px;line-height:1.85}.services{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.service-card{border:1px solid var(--line);background:linear-gradient(150deg,#1a211b,#141a15);border-radius:14px;padding:26px;min-height:255px;transition:border-color .2s,transform .2s}.service-card:hover{border-color:#687c50;transform:translateY(-4px)}.service-icon{width:42px;height:42px;border:1px solid #465340;background:#222c20;color:var(--green);display:grid;place-items:center;border-radius:11px;margin-bottom:24px}.service-icon svg{width:21px;height:21px}.service-card h3{font-size:17px;letter-spacing:-.04em;margin:0 0 10px}.service-card p{font-size:12px;line-height:1.85;color:var(--muted);margin:0}.tag-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}.tag{font:9px "DM Mono",monospace;color:#b2bdb0;border:1px solid #354035;padding:5px 7px;border-radius:5px}
+    .work-section{background:#141a15;border-block:1px solid var(--line)}.work-topline{display:flex;align-items:center;gap:10px;font:10px "DM Mono",monospace;color:#a3afa0;margin-bottom:13px}.work-topline span{color:var(--green)}.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.project-card{overflow:hidden;border:1px solid #303b32;border-radius:15px;background:#19201a;transition:transform .2s,border-color .2s}.project-card:hover{transform:translateY(-4px);border-color:#687c50}.project-image{aspect-ratio:16/9;overflow:hidden;background:#202920;border-bottom:1px solid #303b32;display:grid;place-items:center}.project-image img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .5s}.project-card:hover .project-image img{transform:scale(1.025)}.project-placeholder{width:100%;height:100%;padding:22px;display:flex;flex-direction:column;justify-content:space-between;background:radial-gradient(ellipse at top right,rgba(200,241,105,.14),transparent 55%),#1a211b}.placeholder-bars{display:flex;gap:7px;align-items:end;height:72px}.placeholder-bars i{display:block;width:9%;border-radius:3px 3px 0 0;background:var(--green);opacity:.8}.placeholder-bars i:nth-child(2n){opacity:.3}.project-body{padding:22px 23px 24px}.project-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;font:9px "DM Mono",monospace;color:#a1ad9e;text-transform:uppercase;letter-spacing:.08em}.project-body h3{font-size:21px;letter-spacing:-.05em;margin:13px 0 9px}.project-body p{font-size:12px;line-height:1.85;color:var(--muted);margin:0;max-width:510px}.project-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:19px;padding-top:16px;border-top:1px solid #303b32}.project-foot span{font:10px "DM Mono",monospace;color:#c3cdc0}.text-link{display:inline-flex;align-items:center;gap:7px;color:var(--green);font-size:11px;font-weight:800}.text-link svg{width:14px;height:14px;transition:transform .2s}.text-link:hover svg{transform:translate(3px,-2px)}
+    .pipeline-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:68px;align-items:center}.split-copy p{color:var(--muted);font-size:13px;line-height:1.95;margin:22px 0}.check-list{list-style:none;padding:0;margin:25px 0;display:grid;gap:12px}.check-list li{display:flex;gap:10px;align-items:start;color:#d0d8cd;font-size:12px}.check-list svg{width:16px;height:16px;flex:none;color:var(--green);margin-top:2px}.pipeline-visual{padding:26px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(140deg,#19211a,#131914)}.pipeline-caption{display:flex;justify-content:space-between;gap:10px;font:10px "DM Mono",monospace;color:#a4b09f;margin-bottom:24px}.pipeline-caption b{font-weight:400;color:var(--green)}.pipe-step{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:13px;padding:15px 14px;border:1px solid #364135;border-radius:10px;background:#1b241c}.pipe-icon{width:39px;height:39px;display:grid;place-items:center;border-radius:9px;background:#283526;color:var(--green)}.pipe-icon svg{width:19px;height:19px}.pipe-step strong{display:block;font-size:12px}.pipe-step small{display:block;color:#9ba899;font-size:10px;margin-top:3px}.pipe-state{font:9px "DM Mono",monospace;color:var(--green)}.pipe-connector{height:23px;width:1px;background:#65764f;margin-left:34px;position:relative}.pipe-connector:after{content:"";position:absolute;bottom:0;left:-3px;border-left:3px solid transparent;border-right:3px solid transparent;border-top:5px solid #8ea85e}.pipe-foot{display:flex;justify-content:space-between;gap:12px;margin-top:19px;font:9px "DM Mono",monospace;color:#9aa696}
+    .process-section{background:#141a15;border-block:1px solid var(--line)}.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.process-step{padding:23px 20px;border:1px solid #303b32;border-radius:12px}.step-num{font:11px "DM Mono",monospace;color:var(--green)}.process-step h3{font-size:15px;margin:18px 0 8px;letter-spacing:-.03em}.process-step p{font-size:11px;line-height:1.8;color:var(--muted);margin:0}
+    .contact-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:start}.contact-copy p{font-size:13px;line-height:1.9;color:var(--muted);max-width:390px;margin:22px 0}.contact-detail{display:flex;align-items:center;gap:11px;color:#d6ded2;font-size:12px;margin-top:25px}.contact-detail svg{width:17px;height:17px;color:var(--green)}.contact-form{padding:28px;border:1px solid var(--line);border-radius:15px;background:#171e18}.form-heading{font-size:17px;font-weight:800;letter-spacing:-.04em;margin:0 0 5px}.form-sub{font-size:11px;color:var(--muted);margin:0 0 23px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field{display:grid;gap:7px}.field.full{grid-column:1/-1}.field label{font:10px "DM Mono",monospace;color:#c0cbbd}.field input,.field textarea,.field select{width:100%;min-width:0;border:1px solid #3a463a;border-radius:7px;background:#111712;color:var(--text);padding:12px 12px;font-size:12px}.field input::placeholder,.field textarea::placeholder{color:#738072}.field textarea{resize:vertical;min-height:105px}.field select{appearance:auto}.form-actions{display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin-top:18px}.form-note{font-size:10px;color:#8d9a8c;line-height:1.6}.form-status{min-height:18px;color:var(--green);font-size:11px;margin-top:12px}.footer{border-top:1px solid var(--line);padding:25px 0}.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}.footer small{color:#859184;font-size:10px}.footer-links{display:flex;gap:18px;color:#aab5a8;font-size:10px}.footer-links a:hover{color:var(--green)}.back-top{font:10px "DM Mono",monospace;color:var(--green)}
+    @media(max-width:900px){.hero-grid{gap:35px;grid-template-columns:1fr 1fr}.hero{padding-top:72px}.hero h1{font-size:clamp(42px,6vw,64px)}.pipeline-grid,.contact-wrap{gap:38px}.section-head{align-items:start;flex-direction:column}.section-head p{max-width:560px}.process-grid{grid-template-columns:repeat(2,1fr)}.nav-links{gap:17px}}
+    @media(max-width:700px){.wrap{width:min(var(--max),calc(100% - 32px))}.nav{height:66px}.menu-toggle{display:inline-flex}.nav-cta{margin-left:auto;padding:10px 12px}.nav-links{display:none;position:absolute;top:66px;left:0;right:0;padding:17px 20px 22px;background:#141a15;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0}.nav-links.open{display:flex}.nav-links a{padding:12px 0;border-bottom:1px solid #273027}.hero{padding:65px 0 54px}.hero-grid{grid-template-columns:1fr;gap:42px}.hero h1{font-size:clamp(44px,12vw,66px)}.hero-copy{font-size:14px}.hero-visual{max-width:540px;width:100%;margin:auto}.float-note{right:-3px;bottom:18px}.trust-inner{justify-content:flex-start}.trust-caption{width:100%;margin-bottom:4px}.trust-item{font-size:11px}.section.section{padding:75px 0}.section-head h2,.split-copy h2,.contact-copy h2{font-size:37px}.services,.projects{grid-template-columns:1fr}.service-card{min-height:0}.project-image{aspect-ratio:16/9}.pipeline-grid,.contact-wrap{grid-template-columns:1fr;gap:35px}.pipeline-visual{padding:17px}.process-grid{grid-template-columns:1fr 1fr}.contact-form{padding:20px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.footer-inner{align-items:flex-start;flex-direction:column}.footer-links{flex-wrap:wrap}}
+    @media(max-width:390px){.nav-cta{font-size:10px;padding:9px}.brand{font-size:18px}.process-grid{grid-template-columns:1fr}.metric strong{font-size:17px}.metric{padding:10px 7px}.hero-actions .btn{width:100%}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"DataPulse","url":"https://kurianabraham.site/","description":"Data analytics, Power BI dashboard development, and data engineering services.","areaServed":"Worldwide","email":"contact@kurianabraham.site","serviceType":["Data Analytics","Power BI Dashboards","Data Engineering","PySpark ETL Pipelines"]}</script>
 </head>
-<body class="font-sans text-zinc-300 antialiased selection:bg-cyan-400/30">
-<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-cyan-400 focus:px-3 focus:py-2 focus:text-zinc-950">Skip to content</a>
-
-<!-- Navigation -->
-<header class="sticky top-0 z-40 border-b border-zinc-800/80 bg-zinc-950/80 backdrop-blur-md">
-  <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5" aria-label="Main">
-    <a href="#" class="flex items-center gap-2 font-semibold text-white" aria-label="DataPulse home">
-      <i data-lucide="activity" class="h-5 w-5 text-cyan-400"></i> DataPulse
-    </a>
-    <div class="flex items-center gap-1 sm:gap-2">
-      <a href="https://github.com/kurianabraham79-beep/kurianabraham.github.io#readme" class="hidden rounded-md px-3 py-2 text-sm text-zinc-400 hover:text-white sm:block">Documentation</a>
-      <a href="https://github.com/kurianabraham79-beep/kurianabraham.github.io" class="hidden rounded-md px-3 py-2 text-sm text-zinc-400 hover:text-white sm:block">GitHub</a>
-      <a href="#install" class="rounded-lg bg-cyan-400 px-4 py-2 text-sm font-semibold text-zinc-950 hover:bg-cyan-300">Get Started</a>
-    </div>
-  </nav>
-</header>
-
-<main id="main">
-  <!-- Hero -->
-  <section class="relative overflow-hidden">
-    <div class="bg-grid pointer-events-none absolute inset-0" aria-hidden="true"></div>
-    <div class="pointer-events-none absolute left-1/2 top-0 h-80 w-[40rem] -translate-x-1/2 rounded-full bg-cyan-500/10 blur-3xl" aria-hidden="true"></div>
-
-    <div class="relative mx-auto max-w-4xl px-5 pb-12 pt-20 text-center sm:pt-28">
-      <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl sm:leading-[1.05]">
-        Open-source data pipeline automation <span class="text-zinc-500">for modern data teams.</span>
-      </h1>
-      <p class="mx-auto mt-6 max-w-2xl text-lg text-zinc-400">
-        Build and tune PySpark ETL workflows from your terminal, and let an LLM read your logs and slow queries so you spend less time digging and more time shipping.
-      </p>
-
-      <div id="install" class="mt-10 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-        <a href="https://github.com/kurianabraham79-beep/kurianabraham.github.io" class="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-5 py-3 text-sm font-semibold text-zinc-950 hover:bg-zinc-200">
-          <i data-lucide="github" class="h-4 w-4"></i> View on GitHub
-        </a>
-        <button id="copy-btn" type="button" class="group inline-flex items-center justify-between gap-4 rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-3 font-mono text-sm text-zinc-200 hover:border-cyan-400/60" aria-label="Copy install command">
-          <span><span class="text-cyan-400">$</span> pip install datapulse-cli</span>
-          <span class="relative h-4 w-4">
-            <i data-lucide="copy" id="icon-copy" class="absolute inset-0 h-4 w-4 text-zinc-500 group-hover:text-cyan-400"></i>
-            <i data-lucide="check" id="icon-check" class="absolute inset-0 hidden h-4 w-4 text-emerald-400"></i>
-          </span>
-        </button>
-      </div>
-      <p id="copy-status" class="mt-3 h-5 text-sm text-emerald-400" role="status" aria-live="polite"></p>
-    </div>
-
-    <!-- Terminal -->
-    <div class="relative mx-auto max-w-4xl px-5 pb-24">
-      <div class="glow overflow-hidden rounded-xl border border-zinc-800 bg-[#0c0c0f]">
-        <div class="flex items-center gap-3 border-b border-zinc-800 bg-zinc-900/60 px-4 py-3">
-          <div class="flex gap-1.5" aria-hidden="true">
-            <span class="h-3 w-3 rounded-full bg-zinc-700"></span><span class="h-3 w-3 rounded-full bg-zinc-700"></span><span class="h-3 w-3 rounded-full bg-zinc-700"></span>
-          </div>
-          <div role="tablist" aria-label="CLI examples" class="flex min-w-0 flex-1 gap-1 overflow-x-auto font-mono text-xs">
-            <button role="tab" id="tab-0" aria-selected="true" aria-controls="term" data-i="0" class="whitespace-nowrap rounded-md px-3 py-1.5 text-cyan-300 aria-selected:bg-cyan-400/10 aria-[selected=false]:text-zinc-500 hover:text-zinc-200">optimize</button>
-            <button role="tab" id="tab-1" aria-selected="false" aria-controls="term" data-i="1" class="whitespace-nowrap rounded-md px-3 py-1.5 text-cyan-300 aria-selected:bg-cyan-400/10 aria-[selected=false]:text-zinc-500 hover:text-zinc-200">logs</button>
-            <button role="tab" id="tab-2" aria-selected="false" aria-controls="term" data-i="2" class="whitespace-nowrap rounded-md px-3 py-1.5 text-cyan-300 aria-selected:bg-cyan-400/10 aria-[selected=false]:text-zinc-500 hover:text-zinc-200">schema</button>
-          </div>
+<body>
+  <a href="#main" style="position:absolute;left:-9999px;top:auto" onfocus="this.style.left='16px';this.style.top='16px';this.style.zIndex='100';this.style.background='#c8f169';this.style.color='#111';this.style.padding='10px'>Skip to content</a>
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="DataPulse home"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 13h4l2.4-7L14 19l2.3-6H21" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>DataPulse<span style="color:var(--green)">.</span></a>
+      <div class="nav-links" id="nav-links"><a href="#services">Services</a><a href="#work">Selected work</a><a href="#engineering">Engineering</a><a href="#process">How we work</a></div>
+      <a class="nav-cta" href="#contact">Let’s talk <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="nav-links">☰</button>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Data &amp; analytics studio</div>
+          <h1>Make your data work <em>for you.</em></h1>
+          <p class="hero-copy">We turn scattered data into clear decisions with thoughtful analytics, powerful Power BI dashboards, and reliable data pipelines built to scale with your business.</p>
+          <div class="hero-actions"><a class="btn" href="#contact">Discuss a project <span aria-hidden="true">↗</span></a><a class="btn btn-secondary" href="#work">Explore selected work <span aria-hidden="true">↓</span></a></div>
+          <div class="hero-note"><span class="status-dot"></span> STRATEGY · ANALYTICS · ENGINEERING</div>
         </div>
-        <pre id="term" role="tabpanel" tabindex="0" aria-live="off" class="min-h-[19rem] overflow-x-auto p-5 font-mono text-[13px] leading-6 text-zinc-300 sm:min-h-[17rem] sm:text-sm"></pre>
-      </div>
-      <p class="mt-4 text-center text-sm text-zinc-500">Pick a tab to replay a session.</p>
-    </div>
-  </section>
-
-  <!-- Features -->
-  <section class="border-t border-zinc-800/80 py-24" id="features">
-    <div class="mx-auto max-w-6xl px-5">
-      <h2 class="max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">Everything between raw data and a healthy pipeline.</h2>
-      <p class="mt-4 max-w-2xl text-zinc-400">One CLI for building, debugging, and watching the jobs your team depends on.</p>
-
-      <div class="mt-12 grid gap-5 md:grid-cols-3">
-        <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-6 hover:border-cyan-400/40">
-          <div class="mb-5 inline-flex rounded-lg border border-cyan-400/20 bg-cyan-400/10 p-2.5"><i data-lucide="workflow" class="h-5 w-5 text-cyan-300"></i></div>
-          <h3 class="text-lg font-semibold text-white">Automated PySpark ETL pipelines</h3>
-          <p class="mt-2 text-sm leading-6 text-zinc-400">Scaffold, schedule, and run ETL jobs from a single config file. DataPulse flags skewed joins and suggests partition and broadcast changes before you burn cluster hours.</p>
-        </article>
-        <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-6 hover:border-cyan-400/40">
-          <div class="mb-5 inline-flex rounded-lg border border-cyan-400/20 bg-cyan-400/10 p-2.5"><i data-lucide="sparkles" class="h-5 w-5 text-cyan-300"></i></div>
-          <h3 class="text-lg font-semibold text-white">LLM-powered log and query parsing</h3>
-          <p class="mt-2 text-sm leading-6 text-zinc-400">Connect the Claude API to turn thousands of driver and executor log lines into a short list of root causes, each with a suggested fix. Bring your own API key.</p>
-        </article>
-        <article class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-6 hover:border-cyan-400/40">
-          <div class="mb-5 inline-flex rounded-lg border border-cyan-400/20 bg-cyan-400/10 p-2.5"><i data-lucide="shield-check" class="h-5 w-5 text-cyan-300"></i></div>
-          <h3 class="text-lg font-semibold text-white">Real-time schema validation and monitoring</h3>
-          <p class="mt-2 text-sm leading-6 text-zinc-400">Compare every batch against a baseline schema. Bad rows are quarantined, drift is reported with the exact column and type, and alerts go to your team's channel.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Community -->
-  <section class="border-t border-zinc-800/80 py-24" id="community">
-    <div class="mx-auto max-w-6xl px-5">
-      <div class="grid items-center gap-10 rounded-2xl border border-zinc-800 bg-gradient-to-br from-zinc-900 to-zinc-950 p-8 sm:p-12 md:grid-cols-5">
-        <div class="md:col-span-3">
-          <h2 class="text-3xl font-bold tracking-tight text-white">Built in the open, by and for data engineers.</h2>
-          <p class="mt-4 max-w-xl text-zinc-400">DataPulse CLI is an active open-source project. Read the code, file an issue, or send a pull request. Feedback from people running real pipelines shapes what we build next.</p>
-          <div class="mt-8 flex flex-wrap gap-3">
-            <a href="https://github.com/kurianabraham79-beep/kurianabraham.github.io" class="inline-flex items-center gap-2 rounded-lg bg-cyan-400 px-5 py-3 text-sm font-semibold text-zinc-950 hover:bg-cyan-300"><i data-lucide="github" class="h-4 w-4"></i> Star on GitHub</a>
-            <a href="https://github.com/kurianabraham79-beep/kurianabraham.github.io/issues" class="inline-flex items-center gap-2 rounded-lg border border-zinc-700 px-5 py-3 text-sm font-semibold text-zinc-200 hover:border-zinc-500">Open an issue</a>
+        <div class="hero-visual" aria-label="Illustrative business intelligence dashboard preview">
+          <div class="visual-frame">
+            <div class="frame-top"><span class="frame-dots"><i></i><i></i><i></i></span><span>DATAPULSE / INSIGHTS</span><span>LIVE PREVIEW</span></div>
+            <div class="visual-label"><strong>Business performance</strong><span class="pill">DEMO DATA</span></div>
+            <div class="metric-grid">
+              <div class="metric"><span>REVENUE</span><strong>₹8.4L</strong><small>↗ Illustrative</small></div>
+              <div class="metric"><span>CONVERSION</span><strong>4.8%</strong><small>↗ Illustrative</small></div>
+              <div class="metric"><span>ORDERS</span><strong>1,284</strong><small>↗ Illustrative</small></div>
+            </div>
+            <div class="chart-box">
+              <div class="chart-head"><span>Performance over time</span><span>LAST 8 PERIODS</span></div>
+              <svg class="chart" viewBox="0 0 420 150" role="img" aria-label="Illustrative line chart showing business performance trends">
+                <defs><linearGradient id="fillGreen" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#c8f169" stop-opacity=".24"/><stop offset="1" stop-color="#c8f169" stop-opacity="0"/></linearGradient></defs>
+                <g stroke="#344034" stroke-width="1"><path d="M0 25H420M0 60H420M0 95H420M0 130H420"/></g>
+                <path d="M0 112 C22 108 30 91 58 96 S98 70 120 81 S159 90 180 59 S218 70 240 48 S279 60 300 38 S340 52 360 24 S398 38 420 15 L420 145 L0 145Z" fill="url(#fillGreen)"/>
+                <path d="M0 112 C22 108 30 91 58 96 S98 70 120 81 S159 90 180 59 S218 70 240 48 S279 60 300 38 S340 52 360 24 S398 38 420 15" fill="none" stroke="#c8f169" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M0 124 C30 117 35 120 58 115 S98 103 120 111 S159 105 180 98 S218 104 240 86 S279 95 300 78 S340 87 360 67 S398 77 420 59" fill="none" stroke="#f1a978" stroke-width="1.7" stroke-dasharray="4 4"/>
+              </svg>
+              <div class="legend"><span><i></i>Revenue trend</span><span><i class="orange"></i>Target trend</span></div>
+            </div>
           </div>
+          <div class="float-note"><b>From raw data → clarity</b>Dashboards · Pipelines · Insights</div>
         </div>
-        <ul class="space-y-4 md:col-span-2">
-          <li class="flex gap-3"><i data-lucide="git-pull-request" class="mt-0.5 h-5 w-5 shrink-0 text-cyan-400"></i><span class="text-sm text-zinc-400"><b class="font-medium text-zinc-200">Contribute code.</b> Pick up a good first issue or propose a new command.</span></li>
-          <li class="flex gap-3"><i data-lucide="bug" class="mt-0.5 h-5 w-5 shrink-0 text-cyan-400"></i><span class="text-sm text-zinc-400"><b class="font-medium text-zinc-200">Report bugs.</b> Include your Spark version and a sample log if you can.</span></li>
-          <li class="flex gap-3"><i data-lucide="book-open" class="mt-0.5 h-5 w-5 shrink-0 text-cyan-400"></i><span class="text-sm text-zinc-400"><b class="font-medium text-zinc-200">Improve the docs.</b> Real-world examples help the next person most.</span></li>
-        </ul>
       </div>
-    </div>
-  </section>
-</main>
-
-<!-- Footer -->
-<footer class="border-t border-zinc-800/80 py-10">
-  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 text-sm text-zinc-500 sm:flex-row">
-    <p>&copy; 2026 DataPulse CLI. Open-source software.</p>
-    <div class="flex items-center gap-6">
-      <a href="https://github.com/kurianabraham79-beep/kurianabraham.github.io" class="inline-flex items-center gap-2 hover:text-white"><i data-lucide="github" class="h-4 w-4"></i> GitHub</a>
-      <a href="mailto:contact@kurianabraham.site" class="inline-flex items-center gap-2 hover:text-white"><i data-lucide="mail" class="h-4 w-4"></i> contact@kurianabraham.site</a>
-    </div>
-  </div>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
-<script>
-  if (window.lucide) lucide.createIcons();
-
-  // Copy to clipboard
-  const btn = document.getElementById('copy-btn'), status = document.getElementById('copy-status');
-  const iCopy = document.getElementById('icon-copy'), iCheck = document.getElementById('icon-check');
-  btn.addEventListener('click', async () => {
-    const text = 'pip install datapulse-cli';
-    try {
-      await navigator.clipboard.writeText(text);
-    } catch (e) {
-      const t = document.createElement('textarea'); t.value = text; document.body.appendChild(t); t.select();
-      try { document.execCommand('copy'); } catch (_) {}
-      t.remove();
-    }
-    iCopy.classList.add('hidden'); iCheck.classList.remove('hidden');
-    status.textContent = 'Copied to clipboard';
-    setTimeout(() => { iCopy.classList.remove('hidden'); iCheck.classList.add('hidden'); status.textContent = ''; }, 2000);
-  });
-
-  // Terminal sessions (illustrative output)
-  const sessions = [
-    { cmd: 'datapulse optimize jobs/daily_sales.py --explain', out: [
-      ['ok','✓ Parsed plan: 14 stages, 3 shuffles'],
-      ['warn','! Skewed join on customer_id (top key holds 41% of rows)'],
-      ['hint','  → broadcast(dim_customers)   212 MB, under the 256 MB limit'],
-      ['hint','  → spark.sql.shuffle.partitions: 800 → 200'],
-      ['ok','✓ Estimated runtime: 18m 40s → 6m 05s'],
-      ['dim','Wrote jobs/daily_sales.optimized.py']
-    ]},
-    { cmd: 'datapulse logs parse ./logs/driver.log --llm claude', out: [
-      ['ok','✓ Read 48,212 lines from 3 executors'],
-      ['ok','✓ Grouped into 4 incidents with the Claude API'],
-      ['err','✗ OutOfMemoryError in stage 9 (executor 2)'],
-      ['hint','  cause: collect() on a 2.3M-row DataFrame'],
-      ['hint','  fix:   write to parquet or use limit(); set executor memory to 6g'],
-      ['dim','Full report saved to datapulse-report.md']
-    ]},
-    { cmd: 'datapulse schema watch warehouse.orders --alert slack', out: [
-      ['ok','✓ Baseline loaded (v12, 18 columns)'],
-      ['ok','✓ Batch 4821 passed'],
-      ['err','✗ Batch 4822: column "discount" is string, expected double'],
-      ['err','✗ 312 rows failed rule: order_total >= 0'],
-      ['hint','  → rows quarantined to _quarantine/4822'],
-      ['ok','✓ Alert sent to #data-alerts']
-    ]}
-  ];
-  const colors = { ok:'text-emerald-400', warn:'text-amber-400', err:'text-rose-400', hint:'text-cyan-300', dim:'text-zinc-500' };
-  const term = document.getElementById('term');
-  const tabs = [...document.querySelectorAll('[role=tab]')];
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let run = 0;
-
-  const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  const wait = ms => new Promise(r => setTimeout(r, ms));
-
-  async function play(i) {
-    const id = ++run, s = sessions[i];
-    tabs.forEach((t, k) => t.setAttribute('aria-selected', k === i));
-    term.setAttribute('aria-labelledby', 'tab-' + i);
-    const prompt = '<span class="text-cyan-400">$</span> ';
-    if (reduce) {
-      term.innerHTML = prompt + esc(s.cmd) + '\n\n' + s.out.map(([c, l]) => `<span class="${colors[c]}">${esc(l)}</span>`).join('\n');
-      return;
-    }
-    term.innerHTML = prompt + '<span class="cursor"></span>';
-    let typed = '';
-    for (const ch of s.cmd) {
-      if (id !== run) return;
-      typed += ch;
-      term.innerHTML = prompt + esc(typed) + '<span class="cursor"></span>';
-      await wait(22);
-    }
-    await wait(350);
-    let html = prompt + esc(s.cmd) + '\n\n';
-    for (const [c, l] of s.out) {
-      if (id !== run) return;
-      html += `<span class="${colors[c]}">${esc(l)}</span>\n`;
-      term.innerHTML = html + '<span class="cursor"></span>';
-      await wait(320);
-    }
-    if (id === run) term.innerHTML = html + prompt + '<span class="cursor"></span>';
-  }
-
-  tabs.forEach(t => t.addEventListener('click', () => play(+t.dataset.i)));
-  play(0);
-</script>
+    </section>
+    <div class="trust-strip"><div class="wrap trust-inner"><span class="trust-caption">Where we create value</span><span class="trust-item"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5m0 14h17M8 15l4-5 3 2 5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Business intelligence</span><span class="trust-item"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Analytics engineering</span><span class="trust-item"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="14" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.8"/><path d="M10 7h4a2 2 0 0 1 2 2v5" stroke="currentColor" stroke-width="1.8"/></svg>Data platforms</span><span class="trust-item"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8m0-12.8L5.6 18.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Decision support</span></div></div>
+    <section class="section" id="services"><div class="wrap">
+      <div class="section-head"><div><div class="eyebrow">What we do</div><h2>From messy data to<br>meaningful outcomes.</h2></div><p>Practical data services that connect the technical details to the business questions behind them.</p></div>
+      <div class="services">
+        <article class="service-card"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5m0 14h17M8 15l4-5 3 2 5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Power BI &amp; business intelligence</h3><p>Interactive dashboards that make performance visible, KPIs understandable, and decisions easier to act on.</p><div class="tag-list"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Data modelling</span><span class="tag">Power Query</span></div></article>
+        <article class="service-card"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 4 7.5 12 12l8-4.5L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M4 12l8 4.5 8-4.5M4 16.5 12 21l8-4.5" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></div><h3>Data engineering &amp; ETL</h3><p>Reliable ingestion and transformation workflows that bring data together, improve quality, and make analytics repeatable.</p><div class="tag-list"><span class="tag">SQL</span><span class="tag">Python</span><span class="tag">PySpark</span><span class="tag">AWS</span></div></article>
+        <article class="service-card"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 4h14v5H5zM5 15h14v5H5zM9 9v6m6-6v6" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8 6.5h.01M8 17.5h.01" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div><h3>Analytics &amp; data strategy</h3><p>Translate business goals into useful metrics, clean models, campaign insights, and reporting that teams can trust.</p><div class="tag-list"><span class="tag">KPI frameworks</span><span class="tag">SQL analytics</span><span class="tag">Data quality</span><span class="tag">Automation</span></div></article>
+      </div>
+    </div></section>
+    <section class="section work-section" id="work"><div class="wrap">
+      <div class="section-head"><div><div class="eyebrow">Selected work</div><h2>Real questions.<br>Clearer answers.</h2></div><p>A selection of analytics and reporting projects across commercial and healthcare use cases. Dashboard previews are project work, not client endorsements.</p></div>
+      <div class="projects">
+        <article class="project-card"><div class="project-image"><img src="/1.%20Product%20Sales%20and%20Revenue%20Analytics.png" alt="Product sales and revenue analytics Power BI dashboard" loading="lazy"></div><div class="project-body"><div class="project-meta"><span>01 / Commercial analytics</span><span>POWER BI</span></div><h3>Product sales &amp; revenue analytics</h3><p>A sales performance view built to explore revenue patterns, product contribution, and business trends in one place.</p><div class="project-foot"><span>Sales · Revenue · Product trends</span><a class="text-link" href="mailto:contact@kurianabraham.site?subject=Product%20Sales%20Analytics%20Case%20Study">Discuss a similar project <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></div></article>
+        <article class="project-card"><div class="project-image"><img src="/2.%20Marketing%20Campaign%20Analytics.png" alt="Marketing campaign analytics dashboard for campaign performance" loading="lazy"></div><div class="project-body"><div class="project-meta"><span>02 / Marketing analytics</span><span>POWER BI</span></div><h3>Marketing campaign analytics</h3><p>Campaign reporting for channel performance, lead generation, conversion efficiency, and return on marketing spend.</p><div class="project-foot"><span>CTR · CPC · CPA · ROAS</span><a class="text-link" href="mailto:contact@kurianabraham.site?subject=Marketing%20Analytics%20Case%20Study">Discuss a similar project <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></div></article>
+        <article class="project-card"><div class="project-image"><img src="/3.%20Claims%20%26%20RCM%20Analytics%20Dashboard.png" alt="Healthcare claims and revenue cycle management analytics dashboard" loading="lazy"></div><div class="project-body"><div class="project-meta"><span>03 / Healthcare analytics</span><span>POWER BI</span></div><h3>Claims &amp; revenue cycle analytics</h3><p>A healthcare reporting view for claims, billing gaps, outstanding amounts, and operational performance indicators.</p><div class="project-foot"><span>Claims · RCM · Billing insights</span><a class="text-link" href="mailto:contact@kurianabraham.site?subject=Healthcare%20Analytics%20Case%20Study">Discuss a similar project <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></div></article>
+        <article class="project-card"><div class="project-image"><div class="project-placeholder"><div class="project-meta"><span>DATA QUALITY / PIPELINE DESIGN</span><span class="pill">ENGINEERING</span></div><div class="placeholder-bars" aria-hidden="true"><i style="height:25%"></i><i style="height:44%"></i><i style="height:33%"></i><i style="height:62%"></i><i style="height:49%"></i><i style="height:78%"></i><i style="height:58%"></i><i style="height:91%"></i><i style="height:71%"></i></div><div class="mono muted" style="font-size:10px">Ingest → Transform → Validate → Serve</div></div></div><div class="project-body"><div class="project-meta"><span>04 / Data platform</span><span>PYTHON · SQL</span></div><h3>Fraud analytics &amp; data platform</h3><p>A data-focused case study concept for organizing transaction signals, applying quality checks, and preparing reliable datasets for analysis.</p><div class="project-foot"><span>Data quality · Monitoring · Analysis</span><a class="text-link" href="#engineering">Explore engineering <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></div></article>
+      </div>
+    </div></section>
+    <section class="section" id="engineering"><div class="wrap pipeline-grid">
+      <div class="split-copy"><div class="eyebrow">Under the dashboard</div><h2>Good analytics starts with dependable data.</h2><p>Behind every useful report is a pipeline that collects the right data, transforms it consistently, and makes quality visible. We bring engineering discipline to the whole path—not just the final chart.</p><ul class="check-list"><li><svg viewBox="0 0 24 24" fill="none"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Batch ETL design and PySpark transformations</li><li><svg viewBox="0 0 24 24" fill="none"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>SQL optimisation and reusable data models</li><li><svg viewBox="0 0 24 24" fill="none"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Validation, monitoring, and reporting-ready datasets</li></ul><a class="btn" href="#contact">Talk data architecture <span aria-hidden="true">↗</span></a></div>
+      <div class="pipeline-visual"><div class="pipeline-caption"><span>REFERENCE PIPELINE</span><b>ILLUSTRATIVE FLOW</b></div>
+        <div class="pipe-step"><span class="pipe-icon"><svg viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="5" rx="8" ry="3" stroke="currentColor" stroke-width="1.7"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6" stroke="currentColor" stroke-width="1.7"/></svg></span><span><strong>Ingest</strong><small>Files · APIs · Source systems</small></span><span class="pipe-state">01 / INPUT</span></div><div class="pipe-connector"></div>
+        <div class="pipe-step"><span class="pipe-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16M7 12h10m-7 7h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span><strong>Transform</strong><small>SQL · Python · PySpark</small></span><span class="pipe-state">02 / PROCESS</span></div><div class="pipe-connector"></div>
+        <div class="pipe-step"><span class="pipe-icon"><svg viewBox="0 0 24 24" fill="none"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/></svg></span><span><strong>Validate</strong><small>Schema · Rules · Data quality</small></span><span class="pipe-state">03 / CHECK</span></div><div class="pipe-connector"></div>
+        <div class="pipe-step"><span class="pipe-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5m0 14h17M8 15l4-5 3 2 5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><strong>Deliver insights</strong><small>Data models · Power BI</small></span><span class="pipe-state">04 / SERVE</span></div>
+        <div class="pipe-foot"><span>DESIGNED FOR CLARITY</span><span>END-TO-END THINKING ↗</span></div>
+      </div>
+    </div></section>
+    <section class="section process-section" id="process"><div class="wrap">
+      <div class="section-head"><div><div class="eyebrow">How we work</div><h2>Clear steps. No black boxes.</h2></div><p>A collaborative approach that starts with the business problem and ends with something your team can use and maintain.</p></div>
+      <div class="process-grid"><article class="process-step"><span class="step-num">STEP 01 / DISCOVER</span><h3>Understand the problem</h3><p>Align on goals, users, data sources, definitions, and the decisions the solution should support.</p></article><article class="process-step"><span class="step-num">STEP 02 / DESIGN</span><h3>Shape the solution</h3><p>Agree on metrics, data models, pipeline flow, dashboard layout, and delivery milestones.</p></article><article class="process-step"><span class="step-num">STEP 03 / BUILD</span><h3>Build and validate</h3><p>Develop iteratively, test the logic, review outputs together, and improve based on feedback.</p></article><article class="process-step"><span class="step-num">STEP 04 / HAND OVER</span><h3>Enable your team</h3><p>Document the solution, explain key decisions, and make the deliverables practical to maintain.</p></article></div>
+    </div></section>
+    <section class="section" id="contact"><div class="wrap contact-wrap">
+      <div class="contact-copy"><div class="eyebrow">Start a conversation</div><h2>Have a data problem worth solving?</h2><p>Tell us what you’re trying to understand, automate, or improve. Share a little context and we’ll start with the problem—not a pre-packaged solution.</p><div class="contact-detail"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><a href="mailto:contact@kurianabraham.site">contact@kurianabraham.site</a></div><div class="contact-detail"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11Z" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="10" r="2.3" stroke="currentColor" stroke-width="1.7"/></svg>Available for remote projects</div></div>
+      <form class="contact-form" id="lead-form">
+        <h3 class="form-heading">Tell us about your project</h3><p class="form-sub">A few details are enough to get the conversation started.</p>
+        <div class="form-grid">
+          <div class="field"><label for="name">YOUR NAME *</label><input id="name" name="name" autocomplete="name" placeholder="Jane Smith" required maxlength="100"></div>
+          <div class="field"><label for="email">WORK EMAIL *</label><input id="email" name="email" type="email" autocomplete="email" placeholder="jane@company.com" required maxlength="200"></div>
+          <div class="field full"><label for="service">WHAT CAN WE HELP WITH? *</label><select id="service" name="service" required><option value="">Choose a service</option><option>Power BI dashboards &amp; reporting</option><option>Data engineering &amp; PySpark pipelines</option><option>SQL, data modelling &amp; optimisation</option><option>Marketing or business analytics</option><option>Healthcare / claims analytics</option><option>Something else</option></select></div>
+          <div class="field full"><label for="message">A LITTLE ABOUT THE CHALLENGE *</label><textarea id="message" name="message" placeholder="What are you trying to improve, understand, or automate?" required maxlength="3000"></textarea></div>
+        </div>
+        <div class="form-actions"><button class="btn" type="submit">Prepare project enquiry <span aria-hidden="true">↗</span></button><span class="form-note">Opens your email app with your details ready to send.</span></div>
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div></section>
+  </main>
+  <footer class="footer"><div class="wrap footer-inner"><a class="brand" href="#top"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 13h4l2.4-7L14 19l2.3-6H21" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>DataPulse<span style="color:var(--green)">.</span></a><small>© <span id="year">2026</span> DataPulse. Data, made useful.</small><div class="footer-links"><a href="#services">Services</a><a href="#work">Selected work</a><a href="mailto:contact@kurianabraham.site">Contact</a><a class="back-top" href="#top">BACK TO TOP ↑</a></div></div></footer>
+  <script>
+    (function(){
+      var toggle=document.getElementById('menu-toggle'), links=document.getElementById('nav-links');
+      toggle.addEventListener('click',function(){var open=links.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'Close navigation':'Open navigation');toggle.textContent=open?'✕':'☰';});
+      links.querySelectorAll('a').forEach(function(link){link.addEventListener('click',function(){links.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Open navigation');toggle.textContent='☰';});});
+      document.getElementById('year').textContent=new Date().getFullYear();
+      document.getElementById('lead-form').addEventListener('submit',function(event){
+        event.preventDefault();
+        var form=event.currentTarget;
+        if(!form.reportValidity()) return;
+        var name=document.getElementById('name').value.trim();
+        var email=document.getElementById('email').value.trim();
+        var service=document.getElementById('service').value;
+        var message=document.getElementById('message').value.trim();
+        var subject='Project enquiry — '+service;
+        var body='Hello DataPulse,\\n\\nI would like to discuss a project.\\n\\nName: '+name+'\\nEmail: '+email+'\\nService: '+service+'\\n\\nProject details:\\n'+message+'\\n\\nPlease get in touch with me.';
+        document.getElementById('form-status').textContent='Your email draft is ready. Send it from your email app to complete the enquiry.';
+        window.location.href='mailto:contact@kurianabraham.site?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+      });
+    })();
+  </script>
 </body>
 </html>
