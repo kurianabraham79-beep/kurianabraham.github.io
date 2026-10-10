@@ -143,7 +143,7 @@
         var service=document.getElementById('service').value;
         var message=document.getElementById('message').value.trim();
         var subject='Project enquiry — '+service;
-        var body='Hello DataPulse,\\n\\nI would like to discuss a project.\\n\\nName: '+name+'\\nEmail: '+email+'\\nService: '+service+'\\n\\nProject details:\\n'+message+'\\n\\nPlease get in touch with me.';
+        var body='Hello DataPulse,\n\nI would like to discuss a project.\n\nName: '+name+'\nEmail: '+email+'\nService: '+service+'\n\nProject details:\n'+message+'\n\nPlease get in touch with me.';
         document.getElementById('form-status').textContent='Your email draft is ready. Send it from your email app to complete the enquiry.';
         window.location.href='mailto:contact@kurianabraham.site?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
       });
