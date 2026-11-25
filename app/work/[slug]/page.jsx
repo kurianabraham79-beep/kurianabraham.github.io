@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { PROJECTS } from "@/lib/content";
 import CaseHero from "@/components/CaseHero";
-import { ConceptArt } from "@/components/Work";
+import ProjectArt from "@/components/ProjectArt";
 
 export const dynamicParams = false;
 
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }) {
       title: `${p.title} — Kurian Abraham`,
       description: p.question,
       url: `/work/${p.slug}/`,
-      images: [p.image ? `/img/${p.image}-1200.webp` : "/share.jpg"],
+      images: ["/share.jpg"],
     },
   };
 }
@@ -37,34 +37,15 @@ export default async function CasePage({ params }) {
   return (
     <main id="main" className="case">
       <CaseHero project={p}>
-        {p.image ? (
-          <figure className="case__shot">
-            <img
-              src={`/img/${p.image}-1200.webp`}
-              srcSet={`/img/${p.image}-700.webp 700w, /img/${p.image}-1200.webp 1200w, /img/${p.image}.webp 1693w`}
-              sizes="(max-width: 1440px) 92vw, 1300px"
-              width="1693"
-              height="929"
-              alt={p.alt}
-              fetchPriority="high"
-            />
-          </figure>
-        ) : (
-          <div className="case__shot" style={{ aspectRatio: "16 / 7", position: "relative" }}>
-            <ConceptArt />
-          </div>
-        )}
+        <div className="case__shot" style={{ aspectRatio: "16 / 7", position: "relative" }}>
+          <ProjectArt project={p} />
+        </div>
       </CaseHero>
 
       <div className="wrap">
-        <div style={{ display: "flex", gap: 16, flexWrap: "wrap", alignItems: "center" }}>
-          {p.dashboard && (
-            <a className="btn btn--accent" href={p.dashboard} target="_blank" rel="noopener noreferrer">Open the live dashboard ↗</a>
-          )}
-          {p.full && (
-            <a className="case__full" href={encodeURI(p.full)}>See the full-size screenshot ↗</a>
-          )}
-        </div>
+        {p.dashboard && (
+          <a className="btn btn--accent" style={{ marginTop: 16 }} href={p.dashboard} target="_blank" rel="noopener noreferrer">Open the live dashboard ↗</a>
+        )}
 
         <div className="case__body">
           <h2>The business question</h2>

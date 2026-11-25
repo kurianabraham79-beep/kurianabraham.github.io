@@ -413,3 +413,11 @@ tr[data-removed="true"] td:not(.pick) { color: var(--ink-3); text-decoration: li
 .marquee__pause:hover { color: var(--ink); border-color: var(--ink); }
 .marquee__pause svg { width: 14px; height: 14px; }
 @media (prefers-reduced-motion: reduce) { .marquee__pause { display: none; } .marquee__track { flex-wrap: wrap; width: auto; justify-content: center; row-gap: 12px; } .marquee__item:nth-child(n + 12) { display: none; } }
+
+/* project drawings fill their frame on the site's own ground */
+.wcard__frame, .case__shot { background: #0a0d12; }
+.concept-art svg { width: 92%; height: auto; max-height: 92%; }
+.case__shot .concept-art { position: absolute; inset: 0; }
+
+/* on a phone the drawing keeps its figures and bars; the fine labels would be under 6px */
+@media (max-width: 639px) { .concept-art .fine { display: none; } }
