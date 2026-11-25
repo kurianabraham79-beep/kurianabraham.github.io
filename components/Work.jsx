@@ -3,34 +3,9 @@ import { useEffect, useRef } from "react";
 import { gsap, useGSAP, ScrollTrigger, MOTION_OK } from "@/lib/gsap";
 import { PROJECTS } from "@/lib/content";
 import { Arrow } from "./Icons";
+import ProjectArt from "./ProjectArt";
 
 const RETURN_KEY = "ka-return-y";
-
-export function ConceptArt() {
-  // the concept's own picture: its four stages, drawn as a pipeline
-  const nodes = ["Ingest", "Transform", "Validate", "Serve"];
-  return (
-    <div className="concept-art" role="img" aria-label="Concept pipeline: files, APIs and source systems are ingested, transformed, validated and served to Power BI">
-      <svg viewBox="0 0 900 400" aria-hidden="true">
-        {["Files", "APIs", "Source systems"].map((s, i) => (
-          <g key={s}>
-            <rect x="40" y={92 + i * 80} width="150" height="44" rx="10" fill="none" stroke="#ede8de" strokeOpacity="0.35" strokeDasharray="4 4" />
-            <text x="115" y={119 + i * 80} textAnchor="middle" fill="#ede8de" fillOpacity="0.7" fontFamily="var(--mono)" fontSize="15">{s}</text>
-            <path d={`M190 ${114 + i * 80} C 240 ${114 + i * 80}, 230 194, 270 194`} fill="none" stroke="#ede8de" strokeOpacity="0.3" />
-          </g>
-        ))}
-        {nodes.map((n, i) => (
-          <g key={n}>
-            <rect x={270 + i * 155} y="170" width="130" height="48" rx="12" fill={i === 3 ? "#c8f560" : "#171b21"} stroke={i === 2 ? "#c8f560" : "#ede8de"} strokeOpacity={i === 2 ? 1 : 0.35} />
-            <text x={335 + i * 155} y="200" textAnchor="middle" fill={i === 3 ? "#0b0d10" : "#ede8de"} fontFamily="var(--mono)" fontSize="15">{n}</text>
-            {i < 3 && <path d={`M${400 + i * 155} 194 H ${425 + i * 155}`} stroke="#ede8de" strokeOpacity="0.4" />}
-          </g>
-        ))}
-        <text x="335" y="262" fill="#ede8de" fillOpacity="0.4" fontFamily="var(--mono)" fontSize="13">SQL · Python · PySpark → schema · rules → data models · Power BI</text>
-      </svg>
-    </div>
-  );
-}
 
 export default function Work() {
   const root = useRef(null);
@@ -79,9 +54,9 @@ export default function Work() {
             invalidateOnRefresh: true,
           },
         });
-        // each screenshot drifts inside its frame as it crosses the screen
-        gsap.utils.toArray(".wcard__frame img").forEach((img) => {
-          gsap.fromTo(img, { xPercent: -5 }, { xPercent: 5, ease: "none", scrollTrigger: { trigger: img.closest(".wcard"), containerAnimation: scroll, start: "left right", end: "right left", scrub: true } });
+        // each drawing drifts a little inside its frame as it crosses the screen
+        gsap.utils.toArray(".wcard__frame svg").forEach((svg) => {
+          gsap.fromTo(svg, { xPercent: -3 }, { xPercent: 3, ease: "none", scrollTrigger: { trigger: svg.closest(".wcard"), containerAnimation: scroll, start: "left right", end: "right left", scrub: true } });
         });
         gsap.from(".wcard__meta", { y: 30, autoAlpha: 0, stagger: 0.12, duration: 1, scrollTrigger: { trigger: ".work__viewport", start: "top 70%" } });
       });
@@ -96,7 +71,7 @@ export default function Work() {
           <span className="eyebrow">Selected work</span>
           <h2 id="work-h" className="h2">Three dashboards, <em>one concept.</em></h2>
         </div>
-        <p className="lead">Commercial, marketing and healthcare reporting in Power BI, and a data platform designed from ingest to serve. Dashboard previews are project work, not client endorsements.</p>
+        <p className="lead">Commercial, marketing and healthcare reporting in Power BI, and a data platform designed from ingest to serve. The drawings show each dashboard’s own figures; they are project work, not client endorsements.</p>
       </div>
       <div className="work__viewport">
         <div className="work__track">
@@ -104,20 +79,7 @@ export default function Work() {
             <a className="wcard" key={p.slug} href={`/work/${p.slug}/`} onClick={remember}>
               <div className="wcard__frame">
                 {p.concept && <span className="wcard__badge">Concept</span>}
-                {p.image ? (
-                  <img
-                    src={`/img/${p.image}-1200.webp`}
-                    srcSet={`/img/${p.image}-700.webp 700w, /img/${p.image}-1200.webp 1200w, /img/${p.image}.webp 1693w`}
-                    sizes="(max-width: 1023px) 92vw, 78vw"
-                    width="1693"
-                    height="929"
-                    loading="lazy"
-                    decoding="async"
-                    alt={p.alt}
-                  />
-                ) : (
-                  <ConceptArt />
-                )}
+                <ProjectArt project={p} />
               </div>
               <div className="wcard__meta">
                 <span className="wcard__no">{p.no}</span>
